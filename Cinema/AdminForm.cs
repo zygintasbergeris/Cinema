@@ -19,6 +19,12 @@ namespace Cinema
 
 		private void AdminForm_Load(object sender, EventArgs e)
 		{
+			// TODO: This line of code loads data into the 'cinemaDBDataSet.Client' table. You can move, or remove it, as needed.
+			this.clientTableAdapter.Fill(this.cinemaDBDataSet.Client);
+			// TODO: This line of code loads data into the 'cinemaDBDataSet.Booking' table. You can move, or remove it, as needed.
+			this.bookingTableAdapter.Fill(this.cinemaDBDataSet.Booking);
+			// TODO: This line of code loads data into the 'cinemaDBDataSet.Ticket' table. You can move, or remove it, as needed.
+			this.ticketTableAdapter.Fill(this.cinemaDBDataSet.Ticket);
 			// TODO: This line of code loads data into the 'cinemaDBDataSet.Film' table. You can move, or remove it, as needed.
 			this.filmTableAdapter.Fill(this.cinemaDBDataSet.Film);
 			// TODO: This line of code loads data into the 'cinemaDBDataSet.Screening' table. You can move, or remove it, as needed.
@@ -71,7 +77,7 @@ namespace Cinema
 		{
 			if (screenings.SelectedRows.Count == 0)
 			{
-				MessageBox.Show("No movie selected");
+				MessageBox.Show("No screening selected");
 				return;
 			}
 			AddScreeningForm screeningForm = new AddScreeningForm();
@@ -82,7 +88,65 @@ namespace Cinema
 		{
 			if (screenings.SelectedRows.Count == 0)
 			{
-				MessageBox.Show("No movie selected");
+				MessageBox.Show("No screening selected");
+				return;
+			}
+		}
+
+		private void button7_Click(object sender, EventArgs e)
+		{
+			AddHallForm hallForm = new AddHallForm();
+			hallForm.Show();
+		}
+
+		private void button8_Click(object sender, EventArgs e)
+		{
+			if (halls.SelectedRows.Count == 0)
+			{
+				MessageBox.Show("No hall selected");
+				return;
+			}
+			AddHallForm hallForm = new AddHallForm();
+			hallForm.Show();
+		}
+
+		private void button9_Click(object sender, EventArgs e)
+		{
+			if (halls.SelectedRows.Count == 0)
+			{
+				MessageBox.Show("No hall selected");
+				return;
+			}
+		}
+
+		private void button10_Click(object sender, EventArgs e)
+		{
+			BuyTicketForm ticketForm = new BuyTicketForm();
+			ticketForm.Show();
+		}
+
+		private void button11_Click(object sender, EventArgs e)
+		{
+			SignupForm signupForm = new SignupForm();
+			signupForm.Show();
+		}
+
+		private void button12_Click(object sender, EventArgs e)
+		{
+			if (clients.SelectedRows.Count == 0)
+			{
+				MessageBox.Show("No client selected");
+				return;
+			}
+			SignupForm signupForm = new SignupForm();
+			signupForm.Show();
+		}
+
+		private void button13_Click(object sender, EventArgs e)
+		{
+			if (clients.SelectedRows.Count == 0)
+			{
+				MessageBox.Show("No client selected");
 				return;
 			}
 		}

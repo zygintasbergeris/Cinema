@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddHallForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddHallForm.Designer.cs">
+      <DependentUpon>AddHallForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddMovieForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +70,12 @@
     </Compile>
     <Compile Include="AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BuyTicketFormcs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BuyTicketFormcs.Designer.cs">
+      <DependentUpon>BuyTicketFormcs.cs</DependentUpon>
     </Compile>
     <Compile Include="CinemaDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -96,6 +108,9 @@
     <Compile Include="UserForm.Designer.cs">
       <DependentUpon>UserForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddHallForm.resx">
+      <DependentUpon>AddHallForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddMovieForm.resx">
       <DependentUpon>AddMovieForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AdminForm.resx">
       <DependentUpon>AdminForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BuyTicketFormcs.resx">
+      <DependentUpon>BuyTicketFormcs.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
