@@ -33,9 +33,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -71,6 +82,9 @@
     <Compile Include="AdminForm.Designer.cs">
       <DependentUpon>AdminForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Booking.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="BuyTicketFormcs.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,11 +96,35 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CinemaDBDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="CinemaModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CinemaModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CinemaModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CinemaModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CinemaModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Client.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Film.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hall.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="MovieInfoForm.cs">
       <SubType>Form</SubType>
@@ -96,11 +134,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Screening.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Seat.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SignupForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SignupForm.Designer.cs">
       <DependentUpon>SignupForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ticket.cs">
+      <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UserForm.cs">
       <SubType>Form</SubType>
@@ -152,6 +199,14 @@
     <None Include="CinemaDBDataSet.xss">
       <DependentUpon>CinemaDBDataSet.xsd</DependentUpon>
     </None>
+    <EntityDeploy Include="CinemaModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CinemaModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="CinemaModel.edmx.diagram">
+      <DependentUpon>CinemaModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -164,6 +219,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CinemaModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CinemaModel.edmx</DependentUpon>
+      <LastGenOutput>CinemaModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CinemaModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CinemaModel.edmx</DependentUpon>
+      <LastGenOutput>CinemaModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

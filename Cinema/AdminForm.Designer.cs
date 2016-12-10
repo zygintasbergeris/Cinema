@@ -69,10 +69,6 @@
 			this.dataGridView1 = new System.Windows.Forms.DataGridView();
 			this.ticketBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.ticketTableAdapter = new Cinema.CinemaDBDataSetTableAdapters.TicketTableAdapter();
-			this.idDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.showingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.hallDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.seatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.bookingBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.bookingTableAdapter = new Cinema.CinemaDBDataSetTableAdapters.BookingTableAdapter();
 			this.clients = new System.Windows.Forms.DataGridView();
@@ -86,6 +82,10 @@
 			this.button11 = new System.Windows.Forms.Button();
 			this.button12 = new System.Windows.Forms.Button();
 			this.button13 = new System.Windows.Forms.Button();
+			this.idDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.showingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.hallDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.seatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.tickets.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
@@ -114,7 +114,7 @@
 			this.tickets.Controls.Add(this.tabPage4);
 			this.tickets.Controls.Add(this.tabPage6);
 			this.tickets.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.tickets.Location = new System.Drawing.Point(0, 24);
+			this.tickets.Location = new System.Drawing.Point(0, 5);
 			this.tickets.Name = "tickets";
 			this.tickets.SelectedIndex = 0;
 			this.tickets.Size = new System.Drawing.Size(496, 237);
@@ -144,7 +144,7 @@
 			this.tabPage2.Location = new System.Drawing.Point(4, 22);
 			this.tabPage2.Name = "tabPage2";
 			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-			this.tabPage2.Size = new System.Drawing.Size(488, 211);
+			this.tabPage2.Size = new System.Drawing.Size(488, 223);
 			this.tabPage2.TabIndex = 1;
 			this.tabPage2.Text = "Screenings";
 			// 
@@ -208,7 +208,7 @@
             this.hallDataGridViewTextBoxColumn});
 			this.screenings.DataSource = this.screeningBindingSource;
 			this.screenings.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.screenings.Location = new System.Drawing.Point(3, 35);
+			this.screenings.Location = new System.Drawing.Point(3, 47);
 			this.screenings.MultiSelect = false;
 			this.screenings.Name = "screenings";
 			this.screenings.RowHeadersVisible = false;
@@ -459,7 +459,7 @@
 			this.tabPage6.Controls.Add(this.clients);
 			this.tabPage6.Location = new System.Drawing.Point(4, 22);
 			this.tabPage6.Name = "tabPage6";
-			this.tabPage6.Size = new System.Drawing.Size(488, 211);
+			this.tabPage6.Size = new System.Drawing.Size(488, 223);
 			this.tabPage6.TabIndex = 5;
 			this.tabPage6.Text = "Clients";
 			// 
@@ -494,38 +494,6 @@
 			// 
 			this.ticketTableAdapter.ClearBeforeFill = true;
 			// 
-			// idDataGridViewTextBoxColumn3
-			// 
-			this.idDataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.idDataGridViewTextBoxColumn3.DataPropertyName = "Id";
-			this.idDataGridViewTextBoxColumn3.HeaderText = "Id";
-			this.idDataGridViewTextBoxColumn3.Name = "idDataGridViewTextBoxColumn3";
-			this.idDataGridViewTextBoxColumn3.ReadOnly = true;
-			// 
-			// showingDataGridViewTextBoxColumn
-			// 
-			this.showingDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.showingDataGridViewTextBoxColumn.DataPropertyName = "Showing";
-			this.showingDataGridViewTextBoxColumn.HeaderText = "Showing";
-			this.showingDataGridViewTextBoxColumn.Name = "showingDataGridViewTextBoxColumn";
-			this.showingDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
-			// hallDataGridViewTextBoxColumn1
-			// 
-			this.hallDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.hallDataGridViewTextBoxColumn1.DataPropertyName = "Hall";
-			this.hallDataGridViewTextBoxColumn1.HeaderText = "Hall";
-			this.hallDataGridViewTextBoxColumn1.Name = "hallDataGridViewTextBoxColumn1";
-			this.hallDataGridViewTextBoxColumn1.ReadOnly = true;
-			// 
-			// seatDataGridViewTextBoxColumn
-			// 
-			this.seatDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-			this.seatDataGridViewTextBoxColumn.DataPropertyName = "Seat";
-			this.seatDataGridViewTextBoxColumn.HeaderText = "Seat";
-			this.seatDataGridViewTextBoxColumn.Name = "seatDataGridViewTextBoxColumn";
-			this.seatDataGridViewTextBoxColumn.ReadOnly = true;
-			// 
 			// bookingBindingSource
 			// 
 			this.bookingBindingSource.DataMember = "Booking";
@@ -548,7 +516,7 @@
             this.dateOfBirthDataGridViewTextBoxColumn});
 			this.clients.DataSource = this.clientBindingSource;
 			this.clients.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.clients.Location = new System.Drawing.Point(0, 32);
+			this.clients.Location = new System.Drawing.Point(0, 44);
 			this.clients.MultiSelect = false;
 			this.clients.Name = "clients";
 			this.clients.ReadOnly = true;
@@ -638,11 +606,43 @@
 			this.button13.UseVisualStyleBackColor = true;
 			this.button13.Click += new System.EventHandler(this.button13_Click);
 			// 
+			// idDataGridViewTextBoxColumn3
+			// 
+			this.idDataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.idDataGridViewTextBoxColumn3.DataPropertyName = "Id";
+			this.idDataGridViewTextBoxColumn3.HeaderText = "Id";
+			this.idDataGridViewTextBoxColumn3.Name = "idDataGridViewTextBoxColumn3";
+			this.idDataGridViewTextBoxColumn3.ReadOnly = true;
+			// 
+			// showingDataGridViewTextBoxColumn
+			// 
+			this.showingDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.showingDataGridViewTextBoxColumn.DataPropertyName = "Screening";
+			this.showingDataGridViewTextBoxColumn.HeaderText = "Screening";
+			this.showingDataGridViewTextBoxColumn.Name = "showingDataGridViewTextBoxColumn";
+			this.showingDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
+			// hallDataGridViewTextBoxColumn1
+			// 
+			this.hallDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.hallDataGridViewTextBoxColumn1.DataPropertyName = "Hall";
+			this.hallDataGridViewTextBoxColumn1.HeaderText = "Hall";
+			this.hallDataGridViewTextBoxColumn1.Name = "hallDataGridViewTextBoxColumn1";
+			this.hallDataGridViewTextBoxColumn1.ReadOnly = true;
+			// 
+			// seatDataGridViewTextBoxColumn
+			// 
+			this.seatDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.seatDataGridViewTextBoxColumn.DataPropertyName = "Seat";
+			this.seatDataGridViewTextBoxColumn.HeaderText = "Seat";
+			this.seatDataGridViewTextBoxColumn.Name = "seatDataGridViewTextBoxColumn";
+			this.seatDataGridViewTextBoxColumn.ReadOnly = true;
+			// 
 			// AdminForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(496, 261);
+			this.ClientSize = new System.Drawing.Size(496, 242);
 			this.Controls.Add(this.tickets);
 			this.Name = "AdminForm";
 			this.Text = "AdminForm";
@@ -711,10 +711,6 @@
 		private System.Windows.Forms.TabPage tabPage6;
 		private System.Windows.Forms.BindingSource ticketBindingSource;
 		private CinemaDBDataSetTableAdapters.TicketTableAdapter ticketTableAdapter;
-		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn3;
-		private System.Windows.Forms.DataGridViewTextBoxColumn showingDataGridViewTextBoxColumn;
-		private System.Windows.Forms.DataGridViewTextBoxColumn hallDataGridViewTextBoxColumn1;
-		private System.Windows.Forms.DataGridViewTextBoxColumn seatDataGridViewTextBoxColumn;
 		private System.Windows.Forms.BindingSource bookingBindingSource;
 		private CinemaDBDataSetTableAdapters.BookingTableAdapter bookingTableAdapter;
 		private System.Windows.Forms.DataGridView clients;
@@ -728,5 +724,9 @@
 		private System.Windows.Forms.Button button13;
 		private System.Windows.Forms.Button button12;
 		private System.Windows.Forms.Button button11;
+		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn3;
+		private System.Windows.Forms.DataGridViewTextBoxColumn showingDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn hallDataGridViewTextBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn seatDataGridViewTextBoxColumn;
 	}
 }
