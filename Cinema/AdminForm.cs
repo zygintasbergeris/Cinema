@@ -60,5 +60,31 @@ namespace Cinema
 			}
 
 		}
+
+		private void button4_Click(object sender, EventArgs e)
+		{
+			AddScreeningForm screeningForm = new AddScreeningForm();
+			screeningForm.Show();
+		}
+
+		private void button5_Click(object sender, EventArgs e)
+		{
+			if (screenings.SelectedRows.Count == 0)
+			{
+				MessageBox.Show("No movie selected");
+				return;
+			}
+			AddScreeningForm screeningForm = new AddScreeningForm();
+			screeningForm.Show();
+		}
+
+		private void button6_Click(object sender, EventArgs e)
+		{
+			if (screenings.SelectedRows.Count == 0)
+			{
+				MessageBox.Show("No movie selected");
+				return;
+			}
+		}
 	}
 }
