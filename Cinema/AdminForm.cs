@@ -34,9 +34,31 @@ namespace Cinema
 
 		}
 
+		private void Refresh()
+		{
+			movies.Update();
+			movies.Refresh();
+			screenings.Update();
+			screenings.Refresh();
+			halls.Update();
+			halls.Refresh();
+			tickets.Update();
+			tickets.Refresh();
+			clients.Update();
+			clients.Refresh();
+		}
+		
+
 		private void dataGridView3_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
-			MovieInfoForm movieInfo = new MovieInfoForm();
+			if (movies.SelectedRows.Count == 0)
+			{
+				MessageBox.Show("No movie selected");
+				return;
+			}
+			Entities context = new Entities();
+			Film film = (context.Films.Where(x => x.Id.Equals(movies.SelectedRows[0].Cells[0].Value))).FirstOrDefault();
+			MovieInfoForm movieInfo = new MovieInfoForm(film);
 			movieInfo.Show();
 		}
 
@@ -53,7 +75,9 @@ namespace Cinema
 				MessageBox.Show("No movie selected");
 				return;
 			}
-			AddMovieForm movieForm = new AddMovieForm();
+			Entities context = new Entities();
+			Film film = (context.Films.Where(x => x.Id.Equals(movies.SelectedRows[0].Cells[0].Value))).FirstOrDefault();
+			AddMovieForm movieForm = new AddMovieForm(film);
 			movieForm.Show();
 		}
 

@@ -13,10 +13,10 @@ namespace Cinema
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class CinemaDBEntities : DbContext
+    public partial class Entities : DbContext
     {
-        public CinemaDBEntities()
-            : base("name=CinemaDBEntities")
+        public Entities()
+            : base("name=Entities")
         {
         }
     

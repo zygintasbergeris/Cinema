@@ -29,15 +29,15 @@
 		private void InitializeComponent()
 		{
 			this.label1 = new System.Windows.Forms.Label();
-			this.label2 = new System.Windows.Forms.Label();
+			this.title = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
-			this.label4 = new System.Windows.Forms.Label();
+			this.director = new System.Windows.Forms.Label();
 			this.label5 = new System.Windows.Forms.Label();
-			this.label6 = new System.Windows.Forms.Label();
+			this.year = new System.Windows.Forms.Label();
 			this.label7 = new System.Windows.Forms.Label();
-			this.label8 = new System.Windows.Forms.Label();
+			this.duration = new System.Windows.Forms.Label();
 			this.label9 = new System.Windows.Forms.Label();
-			this.textBox1 = new System.Windows.Forms.TextBox();
+			this.decription = new System.Windows.Forms.TextBox();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -49,14 +49,14 @@
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Title:";
 			// 
-			// label2
+			// title
 			// 
-			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(72, 12);
-			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(35, 13);
-			this.label2.TabIndex = 1;
-			this.label2.Text = "label2";
+			this.title.AutoSize = true;
+			this.title.Location = new System.Drawing.Point(72, 12);
+			this.title.Name = "title";
+			this.title.Size = new System.Drawing.Size(35, 13);
+			this.title.TabIndex = 1;
+			this.title.Text = "label2";
 			// 
 			// label3
 			// 
@@ -67,14 +67,14 @@
 			this.label3.TabIndex = 2;
 			this.label3.Text = "Year:";
 			// 
-			// label4
+			// director
 			// 
-			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(72, 56);
-			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(35, 13);
-			this.label4.TabIndex = 3;
-			this.label4.Text = "label4";
+			this.director.AutoSize = true;
+			this.director.Location = new System.Drawing.Point(72, 56);
+			this.director.Name = "director";
+			this.director.Size = new System.Drawing.Size(35, 13);
+			this.director.TabIndex = 3;
+			this.director.Text = "label4";
 			// 
 			// label5
 			// 
@@ -85,14 +85,14 @@
 			this.label5.TabIndex = 4;
 			this.label5.Text = "Director:";
 			// 
-			// label6
+			// year
 			// 
-			this.label6.AutoSize = true;
-			this.label6.Location = new System.Drawing.Point(72, 34);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(35, 13);
-			this.label6.TabIndex = 5;
-			this.label6.Text = "label6";
+			this.year.AutoSize = true;
+			this.year.Location = new System.Drawing.Point(72, 34);
+			this.year.Name = "year";
+			this.year.Size = new System.Drawing.Size(35, 13);
+			this.year.TabIndex = 5;
+			this.year.Text = "label6";
 			// 
 			// label7
 			// 
@@ -103,14 +103,14 @@
 			this.label7.TabIndex = 6;
 			this.label7.Text = "Duration:";
 			// 
-			// label8
+			// duration
 			// 
-			this.label8.AutoSize = true;
-			this.label8.Location = new System.Drawing.Point(72, 78);
-			this.label8.Name = "label8";
-			this.label8.Size = new System.Drawing.Size(35, 13);
-			this.label8.TabIndex = 7;
-			this.label8.Text = "label8";
+			this.duration.AutoSize = true;
+			this.duration.Location = new System.Drawing.Point(72, 78);
+			this.duration.Name = "duration";
+			this.duration.Size = new System.Drawing.Size(35, 13);
+			this.duration.TabIndex = 7;
+			this.duration.Text = "label8";
 			// 
 			// label9
 			// 
@@ -121,29 +121,29 @@
 			this.label9.TabIndex = 8;
 			this.label9.Text = "Description:";
 			// 
-			// textBox1
+			// decription
 			// 
-			this.textBox1.Location = new System.Drawing.Point(15, 121);
-			this.textBox1.Multiline = true;
-			this.textBox1.Name = "textBox1";
-			this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-			this.textBox1.Size = new System.Drawing.Size(253, 128);
-			this.textBox1.TabIndex = 9;
+			this.decription.Location = new System.Drawing.Point(15, 121);
+			this.decription.Multiline = true;
+			this.decription.Name = "decription";
+			this.decription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+			this.decription.Size = new System.Drawing.Size(253, 128);
+			this.decription.TabIndex = 9;
 			// 
 			// MovieInfoForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(284, 261);
-			this.Controls.Add(this.textBox1);
+			this.Controls.Add(this.decription);
 			this.Controls.Add(this.label9);
-			this.Controls.Add(this.label8);
+			this.Controls.Add(this.duration);
 			this.Controls.Add(this.label7);
-			this.Controls.Add(this.label6);
+			this.Controls.Add(this.year);
 			this.Controls.Add(this.label5);
-			this.Controls.Add(this.label4);
+			this.Controls.Add(this.director);
 			this.Controls.Add(this.label3);
-			this.Controls.Add(this.label2);
+			this.Controls.Add(this.title);
 			this.Controls.Add(this.label1);
 			this.Name = "MovieInfoForm";
 			this.Text = "MovieInfoForm";
@@ -155,14 +155,14 @@
 		#endregion
 
 		private System.Windows.Forms.Label label1;
-		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label title;
 		private System.Windows.Forms.Label label3;
-		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Label director;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Label year;
 		private System.Windows.Forms.Label label7;
-		private System.Windows.Forms.Label label8;
+		private System.Windows.Forms.Label duration;
 		private System.Windows.Forms.Label label9;
-		private System.Windows.Forms.TextBox textBox1;
+		private System.Windows.Forms.TextBox decription;
 	}
 }

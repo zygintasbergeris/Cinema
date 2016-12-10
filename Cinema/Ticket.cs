@@ -21,14 +21,13 @@ namespace Cinema
         }
     
         public int Id { get; set; }
-        public int Showing { get; set; }
+        public int Screening { get; set; }
         public short Hall { get; set; }
         public int Seat { get; set; }
-        public int Screening { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
-        public virtual Seat Seat1 { get; set; }
         public virtual Screening Screening1 { get; set; }
+        public virtual Seat Seat1 { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace Cinema
     
         public int Id { get; set; }
         public string Title { get; set; }
-        public System.DateTime Year { get; set; }
+        public int Year { get; set; }
         public string Director { get; set; }
         public System.TimeSpan Duration { get; set; }
         public string Description { get; set; }
