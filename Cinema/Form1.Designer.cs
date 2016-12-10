@@ -101,7 +101,7 @@
 			this.Controls.Add(this.signUp);
 			this.Controls.Add(this.signIn);
 			this.Name = "Form1";
-			this.Text = "Form1";
+			this.Text = "Sign in";
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
