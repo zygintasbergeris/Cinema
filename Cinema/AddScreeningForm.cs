@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -39,7 +40,6 @@ namespace Cinema
 			price.Text = screening.Price.ToString();
 			time.Value = screening.Time;
 			hall.Items.Add(screening.Hall);
-			tables.Screenings.Remove((tables.Screenings.Where(x => x.Id.Equals(screening.Id))).FirstOrDefault());
 			this.Text = "Edit screening";
 			button1.Text = "Edit screening";
 		}
@@ -53,7 +53,7 @@ namespace Cinema
 			screening.Time = time.Value;
 			screening.Hall = (short)hall.SelectedItem;
 			screening.Film = (tables.Films.Where(x => x.Title.Equals((string) title.SelectedItem))).FirstOrDefault().Id;
-			tables.Screenings.Add(screening);
+			tables.Screenings.AddOrUpdate(screening);
 			tables.SaveChanges();
 			this.Close();
 		}

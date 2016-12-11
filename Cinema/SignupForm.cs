@@ -27,6 +27,7 @@ namespace Cinema
 				Pass.Text = client.Password;
 				date.Value = client.DateOfBirth;
 				tables.Clients.Remove((tables.Clients.Where(x => x.Id.Equals(client.Id))).FirstOrDefault());
+				tables.SaveChanges();
 			}
 			this.Text = "Edit client";
 			button1.Text = "Edit client";

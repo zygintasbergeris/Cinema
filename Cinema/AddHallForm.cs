@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -30,16 +31,15 @@ namespace Cinema
 			this.Text = "Edit hall";
 			button1.Text = "Edit hall";
 			this.hall = hall;
-			tables.Halls.Remove((tables.Halls.Where(x => x.Id.Equals(hall.Id))).FirstOrDefault());
 		}
 
 		private void button1_Click(object sender, EventArgs e)
 		{
 			int numOfSeats;
-			if (int.TryParse(textBox1.Text, out numOfSeats))
+			if (!int.TryParse(textBox1.Text, out numOfSeats))
 				MessageBox.Show("Invalid number format");
 			hall.NumberOfSeats = Convert.ToInt32(textBox1.Text);
-			tables.Halls.Add(hall);
+			tables.Halls.AddOrUpdate(hall);
 			tables.SaveChanges();
 			this.Close();
 		}

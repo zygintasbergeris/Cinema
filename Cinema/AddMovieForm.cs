@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -31,11 +32,10 @@ namespace Cinema
 			title.Text = film.Title;
 			director.Text = film.Director;
 			year.Text = film.Year.ToString();
-			duration.Text = film.Duration.ToString();
+			duration.Text = film.Duration.Hours + ":" + film.Duration.Minutes;
 			description.Text = film.Description;
 			tables = new Entities();
 			this.film = film;
-			tables.Films.Remove((tables.Films.Where(x => x.Id.Equals(film.Id))).FirstOrDefault());
 		}
 
 		private void button1_Click(object sender, EventArgs e)
@@ -58,7 +58,7 @@ namespace Cinema
 			film.Year = Convert.ToInt32(year.Text);
 			string[] str = duration.Text.Split(':');
 			film.Duration = new TimeSpan(Convert.ToInt32(str[0]), Convert.ToInt32(str[1]), 0);
-			tables.Films.Add(film);
+			tables.Films.AddOrUpdate(film);
 			tables.SaveChanges();
 			this.Close();
 		}
