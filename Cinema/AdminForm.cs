@@ -42,24 +42,7 @@ namespace Cinema
 			{
 				MessageBox.Show(ex.ToString());
 			}
-			
-
 		}
-
-		private void Refresh()
-		{
-			movies.Update();
-			movies.Refresh();
-			screenings.Update();
-			screenings.Refresh();
-			halls.Update();
-			halls.Refresh();
-			tickets.Update();
-			tickets.Refresh();
-			clients.Update();
-			clients.Refresh();
-		}
-		
 
 		private void movies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
@@ -78,7 +61,7 @@ namespace Cinema
 		{
 			AddMovieForm movieForm = new AddMovieForm();
 			movieForm.Show();
-			movieForm.Closing += (x, args) => Refresh();
+			movieForm.Closing += (x, args) => AdminForm_Load(this, new EventArgs());
 		}
 
 		private void updateMovie_Click(object sender, EventArgs e)
@@ -92,7 +75,7 @@ namespace Cinema
 			Film film = (tables.Films.Where(x => x.Id.Equals(id))).FirstOrDefault();
 			AddMovieForm movieForm = new AddMovieForm(film);
 			movieForm.Show();
-			movieForm.Closing += (x, args) => Refresh();
+			movieForm.Closing += (x, args) => AdminForm_Load(this, new EventArgs());
 		}
 
 		private void removeMovie_Click(object sender, EventArgs e)
@@ -105,14 +88,14 @@ namespace Cinema
 			int id = (int)movies.SelectedRows[0].Cells[0].Value;
 			tables.Films.Remove((tables.Films.Where(x => x.Id.Equals(id))).FirstOrDefault());
 			tables.SaveChanges();
-			Refresh();
+			AdminForm_Load(this, new EventArgs());
 		}
 
 		private void addScreening_Click(object sender, EventArgs e)
 		{
 			AddScreeningForm screeningForm = new AddScreeningForm();
 			screeningForm.Show();
-			screeningForm.Closing += (x, args) => Refresh();
+			screeningForm.Closing += (x, args) => AdminForm_Load(this, new EventArgs());
 		}
 
 		private void updateScreening_Click(object sender, EventArgs e)
@@ -126,7 +109,7 @@ namespace Cinema
 			Screening screening = (tables.Screenings.Where(x => x.Id.Equals(id))).FirstOrDefault();
 			AddScreeningForm screeningForm = new AddScreeningForm(screening);
 			screeningForm.Show();
-			screeningForm.Closing += (x, args) => Refresh();
+			screeningForm.Closing += (x, args) => AdminForm_Load(this, new EventArgs());
 		}
 
 		private void deleteScreening_Click(object sender, EventArgs e)
@@ -139,14 +122,14 @@ namespace Cinema
 			int id = (int)screenings.SelectedRows[0].Cells[0].Value;
 			tables.Screenings.Remove((tables.Screenings.Where(x => x.Id.Equals(id))).FirstOrDefault());
 			tables.SaveChanges();
-			Refresh();
+			AdminForm_Load(this, new EventArgs());
 		}
 
 		private void addHall_Click(object sender, EventArgs e)
 		{
 			AddHallForm hallForm = new AddHallForm();
 			hallForm.Show();
-			hallForm.Closing += (x, args) => Refresh();
+			hallForm.Closing += (x, args) => AdminForm_Load(this, new EventArgs());
 		}
 
 		private void updateHall_Click(object sender, EventArgs e)
@@ -160,7 +143,7 @@ namespace Cinema
 			Hall hall = (tables.Halls.Where(x => x.Id.Equals(id))).FirstOrDefault();
 			AddHallForm hallForm = new AddHallForm(hall);
 			hallForm.Show();
-			hallForm.Closing += (x, args) => Refresh();
+			hallForm.Closing += (x, args) => AdminForm_Load(this, new EventArgs());
 		}
 
 		private void deleteHall_Click(object sender, EventArgs e)
@@ -173,21 +156,21 @@ namespace Cinema
 			short id = (short)screenings.SelectedRows[0].Cells[0].Value;
 			tables.Halls.Remove((tables.Halls.Where(x => x.Id.Equals(id))).FirstOrDefault());
 			tables.SaveChanges();
-			Refresh();
+			AdminForm_Load(this, new EventArgs());
 		}
 
 		private void buyTicket_Click(object sender, EventArgs e)
 		{
 			BuyTicketForm ticketForm = new BuyTicketForm();
 			ticketForm.Show();
-			ticketForm.Closing += (x, args) => Refresh();
+			ticketForm.Closing += (x, args) => AdminForm_Load(this, new EventArgs());
 		}
 
 		private void addClient_Click(object sender, EventArgs e)
 		{
 			SignupForm signupForm = new SignupForm();
 			signupForm.Show();
-			signupForm.Closing += (x, args) => Refresh();
+			signupForm.Closing += (x, args) => AdminForm_Load(this, new EventArgs());
 		}
 
 		private void updateClient_Click(object sender, EventArgs e)
@@ -201,7 +184,7 @@ namespace Cinema
 			Client client= (tables.Clients.Where(x => x.Id.Equals(id))).FirstOrDefault();
 			SignupForm signupForm = new SignupForm(client);
 			signupForm.Show();
-			signupForm.Closing += (x, args) => Refresh();
+			signupForm.Closing += (x, args) => AdminForm_Load(this, new EventArgs());
 		}
 
 		private void deleteClient_Click(object sender, EventArgs e)
@@ -214,7 +197,7 @@ namespace Cinema
 			int id = (int)clients.SelectedRows[0].Cells[0].Value;
 			tables.Clients.Remove((tables.Clients.Where(x => x.Id.Equals(id))).FirstOrDefault());
 			tables.SaveChanges();
-			Refresh();
+			AdminForm_Load(this, new EventArgs());
 		}
 
 		private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
