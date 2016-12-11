@@ -205,5 +205,142 @@ namespace Cinema
 			tables.SaveChanges();
 			tables.Dispose();
 		}
+
+		private void searchMoviesButton_Click(object sender, EventArgs e)
+		{
+			filmBindingSource.ResetBindings(false);
+			var results = tables.Films.Where(movie => (movie.Title.Contains(searchMovies.Text)) ||
+													  (movie.Description.Contains(searchMovies.Text)) ||
+													  (movie.Director.Contains(searchMovies.Text)) ||
+													  (movie.Duration.ToString().Contains(searchMovies.Text)) ||
+													  (movie.Year.ToString().Equals(searchMovies.Text)) ||
+													  (movie.Id.ToString().Equals(searchMovies.Text)));
+			if (results.Count() != 0)
+			{
+				filmBindingSource.DataSource = 
+					results.Select(movie => new {movie.Id, movie.Title, movie.Year, movie.Director, movie.Duration}).ToList();
+				movies.DataSource = filmBindingSource;
+			}
+		}
+
+		private void searchScreeningsButton_Click(object sender, EventArgs e)
+		{
+			screeningBindingSource.ResetBindings(false);
+			var results = tables.Screenings.Where(screening => (screening.Id.ToString().Equals(searchScreenings.Text)) ||
+															  (screening.Film.ToString().Equals(searchScreenings.Text)) ||
+									                          (screening.Hall.ToString().Equals(searchScreenings.Text)) ||
+									                          (screening.Price.ToString().Equals(searchScreenings.Text)) ||
+									                          (screening.Time.ToString().Contains(searchScreenings.Text)));
+			if (results.Count() != 0)
+			{
+				screeningBindingSource.DataSource =
+					results.Select(screening => new {screening.Id, screening.Film, screening.Time, screening.Price, screening.Hall}).ToList();
+				screenings.DataSource = screeningBindingSource;
+			}
+		}
+
+		private void searchHallsButton_Click(object sender, EventArgs e)
+		{
+			hallBindingSource.ResetBindings(false);
+			var results = tables.Halls.Where(hall => (hall.Id.ToString().Equals(searchHalls.Text)) ||
+			                                        (hall.NumberOfSeats.ToString().Equals(searchHalls.Text)));
+			if (results.Count() != 0)
+			{
+				hallBindingSource.DataSource = results.Select(hall => new {hall.Id, hall.NumberOfSeats}).ToList();
+				halls.DataSource = hallBindingSource;
+			}
+		}
+
+		private void searchTicketsButton_Click(object sender, EventArgs e)
+		{
+			ticketBindingSource.ResetBindings(false);
+			var results = tables.Tickets.Where(ticket => (ticket.Id.ToString().Equals(searchScreenings.Text)) ||
+			                                            (ticket.Hall.ToString().Equals(searchScreenings.Text)) ||
+			                                            (ticket.Seat.ToString().Equals(searchScreenings.Text)) ||
+			                                            (ticket.Screening.ToString().Equals(searchScreenings.Text)));
+			if (results.Count() != 0)
+			{
+				ticketBindingSource.DataSource =
+					results.Select(ticket => new {ticket.Id, ticket.Screening, ticket.Hall, ticket.Seat}).ToList();
+				tickets.DataSource = ticketBindingSource;
+			}
+		}
+
+		private void searchClientsButton_Click(object sender, EventArgs e)
+		{
+			clientBindingSource.ResetBindings(false);
+			var results = tables.Clients.Where(client => (client.Id.ToString().Equals(searchClients.Text)) ||
+			                                            (client.DateOfBirth.ToShortDateString().Contains(searchClients.Text)) ||
+			                                            (client.FirstName.Contains(searchClients.Text)) ||
+			                                            (client.LastName.Contains(searchClients.Text)));
+			if (results.Count() != 0)
+			{
+				clientBindingSource.DataSource =
+					results.Select(client => new {client.Id, client.FirstName, client.LastName, client.DateOfBirth}).ToList();
+				clients.DataSource = clientBindingSource;
+			}
+		}
+
+		private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			switch (tabControl.SelectedIndex)
+			{
+				case 0:
+					RefreshMovies();
+					break;
+				case 1:
+					RefreshScreenings();
+					break;
+				case 2:
+					RefreshHalls();
+					break;
+				case 3:
+					RefreshTickets();
+					break;
+				case 4:
+					RefreshClients();
+					break;
+			}
+		}
+
+		private void RefreshMovies()
+		{
+			searchMovies.Clear();
+			filmBindingSource.ResetBindings(false);
+			filmBindingSource.DataSource = cinemaDBDataSet;
+			filmBindingSource.DataMember = "Film";
+		}
+
+		private void RefreshTickets()
+		{
+			searchTickets.Clear();
+			ticketBindingSource.ResetBindings(false);
+			ticketBindingSource.DataSource = cinemaDBDataSet;
+			ticketBindingSource.DataMember = "Ticket";
+		}
+
+		private void RefreshScreenings()
+		{
+			searchScreenings.Clear();
+			screeningBindingSource.ResetBindings(false);
+			screeningBindingSource.DataSource = cinemaDBDataSet;
+			screeningBindingSource.DataMember = "Screening";
+		}
+
+		private void RefreshClients()
+		{
+			searchClients.Clear();
+			clientBindingSource.ResetBindings(false);
+			clientBindingSource.DataSource = cinemaDBDataSet;
+			clientBindingSource.DataMember = "Client";
+		}
+
+		private void RefreshHalls()
+		{
+			searchHalls.Clear();
+			hallBindingSource.ResetBindings(false);
+			hallBindingSource.DataSource = cinemaDBDataSet;
+			hallBindingSource.DataMember = "Hall";
+		}
 	}
 }

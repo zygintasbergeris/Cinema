@@ -29,7 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
-			this.tickets = new System.Windows.Forms.TabControl();
+			this.tabControl = new System.Windows.Forms.TabControl();
 			this.tabPage1 = new System.Windows.Forms.TabPage();
 			this.button3 = new System.Windows.Forms.Button();
 			this.addMovie = new System.Windows.Forms.Button();
@@ -47,7 +47,7 @@
 			this.halls = new System.Windows.Forms.DataGridView();
 			this.tabPage4 = new System.Windows.Forms.TabPage();
 			this.button10 = new System.Windows.Forms.Button();
-			this.dataGridView1 = new System.Windows.Forms.DataGridView();
+			this.tickets = new System.Windows.Forms.DataGridView();
 			this.tabPage6 = new System.Windows.Forms.TabPage();
 			this.button13 = new System.Windows.Forms.Button();
 			this.button11 = new System.Windows.Forms.Button();
@@ -86,7 +86,17 @@
 			this.Screening = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.hallDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.seatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.tickets.SuspendLayout();
+			this.searchMoviesButton = new System.Windows.Forms.Button();
+			this.searchMovies = new System.Windows.Forms.TextBox();
+			this.searchScreeningsButton = new System.Windows.Forms.Button();
+			this.searchScreenings = new System.Windows.Forms.TextBox();
+			this.searchHallsButton = new System.Windows.Forms.Button();
+			this.searchHalls = new System.Windows.Forms.TextBox();
+			this.searchTickets = new System.Windows.Forms.TextBox();
+			this.searchTicketsButton = new System.Windows.Forms.Button();
+			this.searchClientsButton = new System.Windows.Forms.Button();
+			this.searchClients = new System.Windows.Forms.TextBox();
+			this.tabControl.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.movies)).BeginInit();
 			this.tabPage2.SuspendLayout();
@@ -94,7 +104,7 @@
 			this.tabPage3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.halls)).BeginInit();
 			this.tabPage4.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.tickets)).BeginInit();
 			this.tabPage6.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.clients)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.filmBindingSource)).BeginInit();
@@ -106,24 +116,27 @@
 			((System.ComponentModel.ISupportInitialize)(this.bookingBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// tickets
+			// tabControl
 			// 
-			this.tickets.Controls.Add(this.tabPage1);
-			this.tickets.Controls.Add(this.tabPage2);
-			this.tickets.Controls.Add(this.tabPage3);
-			this.tickets.Controls.Add(this.tabPage4);
-			this.tickets.Controls.Add(this.tabPage6);
-			this.tickets.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.tickets.Location = new System.Drawing.Point(0, 6);
-			this.tickets.Margin = new System.Windows.Forms.Padding(4);
-			this.tickets.Name = "tickets";
-			this.tickets.SelectedIndex = 0;
-			this.tickets.Size = new System.Drawing.Size(661, 292);
-			this.tickets.TabIndex = 0;
+			this.tabControl.Controls.Add(this.tabPage1);
+			this.tabControl.Controls.Add(this.tabPage2);
+			this.tabControl.Controls.Add(this.tabPage3);
+			this.tabControl.Controls.Add(this.tabPage4);
+			this.tabControl.Controls.Add(this.tabPage6);
+			this.tabControl.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.tabControl.Location = new System.Drawing.Point(0, 6);
+			this.tabControl.Margin = new System.Windows.Forms.Padding(4);
+			this.tabControl.Name = "tabControl";
+			this.tabControl.SelectedIndex = 0;
+			this.tabControl.Size = new System.Drawing.Size(661, 292);
+			this.tabControl.TabIndex = 0;
+			this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
 			// 
 			// tabPage1
 			// 
 			this.tabPage1.BackColor = System.Drawing.Color.Transparent;
+			this.tabPage1.Controls.Add(this.searchMovies);
+			this.tabPage1.Controls.Add(this.searchMoviesButton);
 			this.tabPage1.Controls.Add(this.button3);
 			this.tabPage1.Controls.Add(this.addMovie);
 			this.tabPage1.Controls.Add(this.button1);
@@ -138,10 +151,10 @@
 			// 
 			// button3
 			// 
-			this.button3.Location = new System.Drawing.Point(349, 7);
+			this.button3.Location = new System.Drawing.Point(432, 38);
 			this.button3.Margin = new System.Windows.Forms.Padding(4);
 			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(187, 28);
+			this.button3.Size = new System.Drawing.Size(217, 28);
 			this.button3.TabIndex = 3;
 			this.button3.Text = "Remove selected movie";
 			this.button3.UseVisualStyleBackColor = true;
@@ -149,10 +162,10 @@
 			// 
 			// addMovie
 			// 
-			this.addMovie.Location = new System.Drawing.Point(11, 7);
+			this.addMovie.Location = new System.Drawing.Point(9, 38);
 			this.addMovie.Margin = new System.Windows.Forms.Padding(4);
 			this.addMovie.Name = "addMovie";
-			this.addMovie.Size = new System.Drawing.Size(156, 28);
+			this.addMovie.Size = new System.Drawing.Size(203, 28);
 			this.addMovie.TabIndex = 2;
 			this.addMovie.Text = "Add new movie";
 			this.addMovie.UseVisualStyleBackColor = true;
@@ -160,10 +173,10 @@
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(175, 7);
+			this.button1.Location = new System.Drawing.Point(220, 38);
 			this.button1.Margin = new System.Windows.Forms.Padding(4);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(167, 28);
+			this.button1.Size = new System.Drawing.Size(203, 28);
 			this.button1.TabIndex = 1;
 			this.button1.Text = "Update selected movie";
 			this.button1.UseVisualStyleBackColor = true;
@@ -183,20 +196,22 @@
             this.durationDataGridViewTextBoxColumn});
 			this.movies.DataSource = this.filmBindingSource;
 			this.movies.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.movies.Location = new System.Drawing.Point(4, 46);
+			this.movies.Location = new System.Drawing.Point(4, 74);
 			this.movies.Margin = new System.Windows.Forms.Padding(4);
 			this.movies.MultiSelect = false;
 			this.movies.Name = "movies";
 			this.movies.ReadOnly = true;
 			this.movies.RowHeadersVisible = false;
 			this.movies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.movies.Size = new System.Drawing.Size(645, 213);
+			this.movies.Size = new System.Drawing.Size(645, 185);
 			this.movies.TabIndex = 0;
 			this.movies.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.movies_CellDoubleClick);
 			// 
 			// tabPage2
 			// 
 			this.tabPage2.BackColor = System.Drawing.Color.Transparent;
+			this.tabPage2.Controls.Add(this.searchScreenings);
+			this.tabPage2.Controls.Add(this.searchScreeningsButton);
 			this.tabPage2.Controls.Add(this.button6);
 			this.tabPage2.Controls.Add(this.button5);
 			this.tabPage2.Controls.Add(this.button4);
@@ -211,7 +226,7 @@
 			// 
 			// button6
 			// 
-			this.button6.Location = new System.Drawing.Point(433, 7);
+			this.button6.Location = new System.Drawing.Point(437, 39);
 			this.button6.Margin = new System.Windows.Forms.Padding(4);
 			this.button6.Name = "button6";
 			this.button6.Size = new System.Drawing.Size(207, 28);
@@ -222,7 +237,7 @@
 			// 
 			// button5
 			// 
-			this.button5.Location = new System.Drawing.Point(219, 7);
+			this.button5.Location = new System.Drawing.Point(223, 39);
 			this.button5.Margin = new System.Windows.Forms.Padding(4);
 			this.button5.Name = "button5";
 			this.button5.Size = new System.Drawing.Size(207, 28);
@@ -233,7 +248,7 @@
 			// 
 			// button4
 			// 
-			this.button4.Location = new System.Drawing.Point(4, 7);
+			this.button4.Location = new System.Drawing.Point(8, 39);
 			this.button4.Margin = new System.Windows.Forms.Padding(4);
 			this.button4.Name = "button4";
 			this.button4.Size = new System.Drawing.Size(207, 28);
@@ -256,18 +271,20 @@
             this.hallDataGridViewTextBoxColumn});
 			this.screenings.DataSource = this.screeningBindingSource;
 			this.screenings.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.screenings.Location = new System.Drawing.Point(4, 46);
+			this.screenings.Location = new System.Drawing.Point(4, 75);
 			this.screenings.Margin = new System.Windows.Forms.Padding(4);
 			this.screenings.MultiSelect = false;
 			this.screenings.Name = "screenings";
 			this.screenings.RowHeadersVisible = false;
 			this.screenings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.screenings.Size = new System.Drawing.Size(645, 213);
+			this.screenings.Size = new System.Drawing.Size(645, 184);
 			this.screenings.TabIndex = 0;
 			// 
 			// tabPage3
 			// 
 			this.tabPage3.BackColor = System.Drawing.Color.Transparent;
+			this.tabPage3.Controls.Add(this.searchHalls);
+			this.tabPage3.Controls.Add(this.searchHallsButton);
 			this.tabPage3.Controls.Add(this.button9);
 			this.tabPage3.Controls.Add(this.button8);
 			this.tabPage3.Controls.Add(this.button7);
@@ -281,10 +298,10 @@
 			// 
 			// button9
 			// 
-			this.button9.Location = new System.Drawing.Point(428, 4);
+			this.button9.Location = new System.Drawing.Point(432, 38);
 			this.button9.Margin = new System.Windows.Forms.Padding(4);
 			this.button9.Name = "button9";
-			this.button9.Size = new System.Drawing.Size(204, 28);
+			this.button9.Size = new System.Drawing.Size(216, 28);
 			this.button9.TabIndex = 3;
 			this.button9.Text = "Remove selected hall";
 			this.button9.UseVisualStyleBackColor = true;
@@ -292,7 +309,7 @@
 			// 
 			// button8
 			// 
-			this.button8.Location = new System.Drawing.Point(216, 4);
+			this.button8.Location = new System.Drawing.Point(220, 38);
 			this.button8.Margin = new System.Windows.Forms.Padding(4);
 			this.button8.Name = "button8";
 			this.button8.Size = new System.Drawing.Size(204, 28);
@@ -303,7 +320,7 @@
 			// 
 			// button7
 			// 
-			this.button7.Location = new System.Drawing.Point(4, 4);
+			this.button7.Location = new System.Drawing.Point(8, 38);
 			this.button7.Margin = new System.Windows.Forms.Padding(4);
 			this.button7.Name = "button7";
 			this.button7.Size = new System.Drawing.Size(204, 28);
@@ -323,20 +340,22 @@
             this.numberOfSeatsDataGridViewTextBoxColumn});
 			this.halls.DataSource = this.hallBindingSource;
 			this.halls.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.halls.Location = new System.Drawing.Point(0, 43);
+			this.halls.Location = new System.Drawing.Point(0, 74);
 			this.halls.Margin = new System.Windows.Forms.Padding(4);
 			this.halls.MultiSelect = false;
 			this.halls.Name = "halls";
 			this.halls.RowHeadersVisible = false;
 			this.halls.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.halls.Size = new System.Drawing.Size(653, 220);
+			this.halls.Size = new System.Drawing.Size(653, 189);
 			this.halls.TabIndex = 0;
 			// 
 			// tabPage4
 			// 
 			this.tabPage4.BackColor = System.Drawing.Color.Transparent;
+			this.tabPage4.Controls.Add(this.searchTicketsButton);
+			this.tabPage4.Controls.Add(this.searchTickets);
 			this.tabPage4.Controls.Add(this.button10);
-			this.tabPage4.Controls.Add(this.dataGridView1);
+			this.tabPage4.Controls.Add(this.tickets);
 			this.tabPage4.Location = new System.Drawing.Point(4, 25);
 			this.tabPage4.Margin = new System.Windows.Forms.Padding(4);
 			this.tabPage4.Name = "tabPage4";
@@ -346,41 +365,43 @@
 			// 
 			// button10
 			// 
-			this.button10.Location = new System.Drawing.Point(4, 4);
+			this.button10.Location = new System.Drawing.Point(4, 7);
 			this.button10.Margin = new System.Windows.Forms.Padding(4);
 			this.button10.Name = "button10";
-			this.button10.Size = new System.Drawing.Size(199, 28);
+			this.button10.Size = new System.Drawing.Size(173, 28);
 			this.button10.TabIndex = 1;
 			this.button10.Text = "Buy tickets";
 			this.button10.UseVisualStyleBackColor = true;
 			this.button10.Click += new System.EventHandler(this.buyTicket_Click);
 			// 
-			// dataGridView1
+			// tickets
 			// 
-			this.dataGridView1.AllowUserToAddRows = false;
-			this.dataGridView1.AllowUserToDeleteRows = false;
-			this.dataGridView1.AutoGenerateColumns = false;
-			this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			this.tickets.AllowUserToAddRows = false;
+			this.tickets.AllowUserToDeleteRows = false;
+			this.tickets.AutoGenerateColumns = false;
+			this.tickets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.tickets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.idDataGridViewTextBoxColumn3,
             this.Screening,
             this.hallDataGridViewTextBoxColumn1,
             this.seatDataGridViewTextBoxColumn});
-			this.dataGridView1.DataSource = this.ticketBindingSource;
-			this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.dataGridView1.Location = new System.Drawing.Point(0, 43);
-			this.dataGridView1.Margin = new System.Windows.Forms.Padding(4);
-			this.dataGridView1.MultiSelect = false;
-			this.dataGridView1.Name = "dataGridView1";
-			this.dataGridView1.ReadOnly = true;
-			this.dataGridView1.RowHeadersVisible = false;
-			this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dataGridView1.Size = new System.Drawing.Size(653, 220);
-			this.dataGridView1.TabIndex = 0;
+			this.tickets.DataSource = this.ticketBindingSource;
+			this.tickets.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.tickets.Location = new System.Drawing.Point(0, 43);
+			this.tickets.Margin = new System.Windows.Forms.Padding(4);
+			this.tickets.MultiSelect = false;
+			this.tickets.Name = "tickets";
+			this.tickets.ReadOnly = true;
+			this.tickets.RowHeadersVisible = false;
+			this.tickets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.tickets.Size = new System.Drawing.Size(653, 220);
+			this.tickets.TabIndex = 0;
 			// 
 			// tabPage6
 			// 
 			this.tabPage6.BackColor = System.Drawing.Color.Transparent;
+			this.tabPage6.Controls.Add(this.searchClients);
+			this.tabPage6.Controls.Add(this.searchClientsButton);
 			this.tabPage6.Controls.Add(this.button13);
 			this.tabPage6.Controls.Add(this.button12);
 			this.tabPage6.Controls.Add(this.button11);
@@ -394,10 +415,10 @@
 			// 
 			// button13
 			// 
-			this.button13.Location = new System.Drawing.Point(388, 4);
+			this.button13.Location = new System.Drawing.Point(418, 41);
 			this.button13.Margin = new System.Windows.Forms.Padding(4);
 			this.button13.Name = "button13";
-			this.button13.Size = new System.Drawing.Size(203, 28);
+			this.button13.Size = new System.Drawing.Size(226, 28);
 			this.button13.TabIndex = 3;
 			this.button13.Text = "Remove selected client";
 			this.button13.UseVisualStyleBackColor = true;
@@ -405,7 +426,7 @@
 			// 
 			// button11
 			// 
-			this.button11.Location = new System.Drawing.Point(4, 4);
+			this.button11.Location = new System.Drawing.Point(9, 41);
 			this.button11.Margin = new System.Windows.Forms.Padding(4);
 			this.button11.Name = "button11";
 			this.button11.Size = new System.Drawing.Size(180, 28);
@@ -427,22 +448,22 @@
             this.dateOfBirthDataGridViewTextBoxColumn});
 			this.clients.DataSource = this.clientBindingSource;
 			this.clients.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.clients.Location = new System.Drawing.Point(0, 43);
+			this.clients.Location = new System.Drawing.Point(0, 77);
 			this.clients.Margin = new System.Windows.Forms.Padding(4);
 			this.clients.MultiSelect = false;
 			this.clients.Name = "clients";
 			this.clients.ReadOnly = true;
 			this.clients.RowHeadersVisible = false;
 			this.clients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.clients.Size = new System.Drawing.Size(653, 220);
+			this.clients.Size = new System.Drawing.Size(653, 186);
 			this.clients.TabIndex = 0;
 			// 
 			// button12
 			// 
-			this.button12.Location = new System.Drawing.Point(192, 4);
+			this.button12.Location = new System.Drawing.Point(197, 41);
 			this.button12.Margin = new System.Windows.Forms.Padding(4);
 			this.button12.Name = "button12";
-			this.button12.Size = new System.Drawing.Size(188, 28);
+			this.button12.Size = new System.Drawing.Size(213, 28);
 			this.button12.TabIndex = 2;
 			this.button12.Text = "Edit selected client";
 			this.button12.UseVisualStyleBackColor = true;
@@ -662,27 +683,117 @@
 			this.seatDataGridViewTextBoxColumn.Name = "seatDataGridViewTextBoxColumn";
 			this.seatDataGridViewTextBoxColumn.ReadOnly = true;
 			// 
+			// searchMoviesButton
+			// 
+			this.searchMoviesButton.Location = new System.Drawing.Point(432, 6);
+			this.searchMoviesButton.Name = "searchMoviesButton";
+			this.searchMoviesButton.Size = new System.Drawing.Size(218, 28);
+			this.searchMoviesButton.TabIndex = 4;
+			this.searchMoviesButton.Text = "Search";
+			this.searchMoviesButton.UseVisualStyleBackColor = true;
+			this.searchMoviesButton.Click += new System.EventHandler(this.searchMoviesButton_Click);
+			// 
+			// searchMovies
+			// 
+			this.searchMovies.Location = new System.Drawing.Point(9, 9);
+			this.searchMovies.Name = "searchMovies";
+			this.searchMovies.Size = new System.Drawing.Size(414, 22);
+			this.searchMovies.TabIndex = 5;
+			// 
+			// searchScreeningsButton
+			// 
+			this.searchScreeningsButton.Location = new System.Drawing.Point(437, 4);
+			this.searchScreeningsButton.Name = "searchScreeningsButton";
+			this.searchScreeningsButton.Size = new System.Drawing.Size(207, 28);
+			this.searchScreeningsButton.TabIndex = 4;
+			this.searchScreeningsButton.Text = "Search";
+			this.searchScreeningsButton.UseVisualStyleBackColor = true;
+			this.searchScreeningsButton.Click += new System.EventHandler(this.searchScreeningsButton_Click);
+			// 
+			// searchScreenings
+			// 
+			this.searchScreenings.Location = new System.Drawing.Point(8, 7);
+			this.searchScreenings.Name = "searchScreenings";
+			this.searchScreenings.Size = new System.Drawing.Size(422, 22);
+			this.searchScreenings.TabIndex = 5;
+			// 
+			// searchHallsButton
+			// 
+			this.searchHallsButton.Location = new System.Drawing.Point(434, 3);
+			this.searchHallsButton.Name = "searchHallsButton";
+			this.searchHallsButton.Size = new System.Drawing.Size(216, 28);
+			this.searchHallsButton.TabIndex = 4;
+			this.searchHallsButton.Text = "Search";
+			this.searchHallsButton.UseVisualStyleBackColor = true;
+			this.searchHallsButton.Click += new System.EventHandler(this.searchHallsButton_Click);
+			// 
+			// searchHalls
+			// 
+			this.searchHalls.Location = new System.Drawing.Point(8, 6);
+			this.searchHalls.Name = "searchHalls";
+			this.searchHalls.Size = new System.Drawing.Size(416, 22);
+			this.searchHalls.TabIndex = 5;
+			// 
+			// searchTickets
+			// 
+			this.searchTickets.Location = new System.Drawing.Point(184, 10);
+			this.searchTickets.Name = "searchTickets";
+			this.searchTickets.Size = new System.Drawing.Size(287, 22);
+			this.searchTickets.TabIndex = 2;
+			// 
+			// searchTicketsButton
+			// 
+			this.searchTicketsButton.Location = new System.Drawing.Point(477, 7);
+			this.searchTicketsButton.Name = "searchTicketsButton";
+			this.searchTicketsButton.Size = new System.Drawing.Size(173, 28);
+			this.searchTicketsButton.TabIndex = 3;
+			this.searchTicketsButton.Text = "Search";
+			this.searchTicketsButton.UseVisualStyleBackColor = true;
+			this.searchTicketsButton.Click += new System.EventHandler(this.searchTicketsButton_Click);
+			// 
+			// searchClientsButton
+			// 
+			this.searchClientsButton.Location = new System.Drawing.Point(418, 6);
+			this.searchClientsButton.Name = "searchClientsButton";
+			this.searchClientsButton.Size = new System.Drawing.Size(226, 28);
+			this.searchClientsButton.TabIndex = 4;
+			this.searchClientsButton.Text = "Search";
+			this.searchClientsButton.UseVisualStyleBackColor = true;
+			this.searchClientsButton.Click += new System.EventHandler(this.searchClientsButton_Click);
+			// 
+			// searchClients
+			// 
+			this.searchClients.Location = new System.Drawing.Point(11, 9);
+			this.searchClients.Name = "searchClients";
+			this.searchClients.Size = new System.Drawing.Size(401, 22);
+			this.searchClients.TabIndex = 5;
+			// 
 			// AdminForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(661, 298);
-			this.Controls.Add(this.tickets);
+			this.Controls.Add(this.tabControl);
 			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "AdminForm";
 			this.Text = "AdminForm";
 			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AdminForm_FormClosing);
 			this.Load += new System.EventHandler(this.AdminForm_Load);
-			this.tickets.ResumeLayout(false);
+			this.tabControl.ResumeLayout(false);
 			this.tabPage1.ResumeLayout(false);
+			this.tabPage1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.movies)).EndInit();
 			this.tabPage2.ResumeLayout(false);
+			this.tabPage2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.screenings)).EndInit();
 			this.tabPage3.ResumeLayout(false);
+			this.tabPage3.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.halls)).EndInit();
 			this.tabPage4.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+			this.tabPage4.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.tickets)).EndInit();
 			this.tabPage6.ResumeLayout(false);
+			this.tabPage6.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.clients)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.filmBindingSource)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.cinemaDBDataSet)).EndInit();
@@ -697,7 +808,7 @@
 
 		#endregion
 
-		private System.Windows.Forms.TabControl tickets;
+		private System.Windows.Forms.TabControl tabControl;
 		private System.Windows.Forms.TabPage tabPage1;
 		private System.Windows.Forms.TabPage tabPage2;
 		private System.Windows.Forms.TabPage tabPage3;
@@ -733,7 +844,7 @@
 		private System.Windows.Forms.Button button8;
 		private System.Windows.Forms.Button button7;
 		private System.Windows.Forms.TabPage tabPage4;
-		private System.Windows.Forms.DataGridView dataGridView1;
+		private System.Windows.Forms.DataGridView tickets;
 		private System.Windows.Forms.TabPage tabPage6;
 		private System.Windows.Forms.BindingSource ticketBindingSource;
 		private CinemaDBDataSetTableAdapters.TicketTableAdapter ticketTableAdapter;
@@ -755,5 +866,15 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn Screening;
 		private System.Windows.Forms.DataGridViewTextBoxColumn hallDataGridViewTextBoxColumn1;
 		private System.Windows.Forms.DataGridViewTextBoxColumn seatDataGridViewTextBoxColumn;
+		private System.Windows.Forms.TextBox searchMovies;
+		private System.Windows.Forms.Button searchMoviesButton;
+		private System.Windows.Forms.TextBox searchScreenings;
+		private System.Windows.Forms.Button searchScreeningsButton;
+		private System.Windows.Forms.TextBox searchHalls;
+		private System.Windows.Forms.Button searchHallsButton;
+		private System.Windows.Forms.Button searchTicketsButton;
+		private System.Windows.Forms.TextBox searchTickets;
+		private System.Windows.Forms.TextBox searchClients;
+		private System.Windows.Forms.Button searchClientsButton;
 	}
 }
