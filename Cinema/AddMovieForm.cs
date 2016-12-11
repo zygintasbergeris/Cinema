@@ -13,9 +13,14 @@ namespace Cinema
 {
 	public partial class AddMovieForm : Form
 	{
+		private Entities tables;
+		Film film;
+
 		public AddMovieForm()
 		{
 			InitializeComponent();
+			tables = new Entities();
+			film = new Film();
 		}
 
 		public AddMovieForm(Film film)
@@ -28,8 +33,9 @@ namespace Cinema
 			year.Text = film.Year.ToString();
 			duration.Text = film.Duration.ToString();
 			description.Text = film.Description;
-			Entities tables = new Entities();
-			tables.Films.Remove(film);
+			tables = new Entities();
+			this.film = film;
+			tables.Films.Remove((tables.Films.Where(x => x.Id.Equals(film.Id))).FirstOrDefault());
 		}
 
 		private void button1_Click(object sender, EventArgs e)
@@ -46,16 +52,20 @@ namespace Cinema
 				MessageBox.Show("Invalid duration. Use Format H:MM");
 				return;
 			}
-			Film film = new Film();
 			film.Description = description.Text;
 			film.Director = director.Text;
 			film.Title = title.Text;
 			film.Year = Convert.ToInt32(year.Text);
 			string[] str = duration.Text.Split(':');
 			film.Duration = new TimeSpan(Convert.ToInt32(str[0]), Convert.ToInt32(str[1]), 0);
-			Entities tables = new Entities();
 			tables.Films.Add(film);
+			tables.SaveChanges();
 			this.Close();
+		}
+
+		private void AddMovieForm_FormClosing(object sender, FormClosingEventArgs e)
+		{
+			tables.Dispose();
 		}
 	}
 }

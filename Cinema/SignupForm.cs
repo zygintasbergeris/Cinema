@@ -17,6 +17,20 @@ namespace Cinema
 		{
 			InitializeComponent();
 		}
+		public SignupForm(Client client)
+		{
+			InitializeComponent();
+			using (Entities tables = new Entities())
+			{
+				Fname.Text = client.FirstName;
+				Lname.Text = client.LastName;
+				Pass.Text = client.Password;
+				date.Value = client.DateOfBirth;
+				tables.Clients.Remove((tables.Clients.Where(x => x.Id.Equals(client.Id))).FirstOrDefault());
+			}
+			this.Text = "Edit client";
+			button1.Text = "Edit client";
+		}
 
 		private void button1_Click(object sender, EventArgs e)
 		{
@@ -31,7 +45,8 @@ namespace Cinema
 
 				SqlDataAdapter adapter = new SqlDataAdapter();
 				adapter.InsertCommand = new SqlCommand("INSERT INTO Client(Firstname, LastName, Password, DateOfBirth)" +
-				                                       "VALUES (@FN, @LN, @P, @D", connection);
+				                                       "VALUES (@FN, @LN, @P, @D)", connection);
+				adapter.SelectCommand = new SqlCommand("SELECT Id, Firstname, LastName, Password, DateOfBirth FROM Client", connection); 
 				adapter.InsertCommand.Parameters.Add(new SqlParameter("@FN", SqlDbType.NVarChar, 50, "FirstName"));
 				adapter.InsertCommand.Parameters.Add(new SqlParameter("@LN", SqlDbType.NVarChar, 50, "LastName"));
 				adapter.InsertCommand.Parameters.Add(new SqlParameter("@P", SqlDbType.NVarChar, 50, "Password"));

@@ -35,9 +35,10 @@
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(15, 36);
+			this.button1.Location = new System.Drawing.Point(20, 44);
+			this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(259, 23);
+			this.button1.Size = new System.Drawing.Size(345, 28);
 			this.button1.TabIndex = 0;
 			this.button1.Text = "Add hall";
 			this.button1.UseVisualStyleBackColor = true;
@@ -46,29 +47,33 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(12, 13);
+			this.label1.Location = new System.Drawing.Point(16, 16);
+			this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(117, 13);
+			this.label1.Size = new System.Drawing.Size(146, 16);
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Number of seats in hall:";
 			// 
 			// textBox1
 			// 
-			this.textBox1.Location = new System.Drawing.Point(135, 10);
+			this.textBox1.Location = new System.Drawing.Point(180, 12);
+			this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(139, 20);
+			this.textBox1.Size = new System.Drawing.Size(184, 22);
 			this.textBox1.TabIndex = 2;
 			// 
 			// AddHallForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(286, 71);
+			this.ClientSize = new System.Drawing.Size(381, 87);
 			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.button1);
+			this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
 			this.Name = "AddHallForm";
 			this.Text = "AddHallForm";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddHallForm_FormClosing);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

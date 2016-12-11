@@ -50,6 +50,8 @@ namespace Cinema {
         
         private global::System.Data.DataRelation relationFK_Ticket_ToSeat;
         
+        private global::System.Data.DataRelation relationFK_Ticket_ToScreening;
+        
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -356,6 +358,7 @@ namespace Cinema {
             this.relationFK_ScreeningToHall = this.Relations["FK_ScreeningToHall"];
             this.relationFK_Seat_Hall = this.Relations["FK_Seat_Hall"];
             this.relationFK_Ticket_ToSeat = this.Relations["FK_Ticket_ToSeat"];
+            this.relationFK_Ticket_ToScreening = this.Relations["FK_Ticket_ToScreening"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -406,6 +409,10 @@ namespace Cinema {
                         this.tableTicket.HallColumn,
                         this.tableTicket.SeatColumn}, false);
             this.Relations.Add(this.relationFK_Ticket_ToSeat);
+            this.relationFK_Ticket_ToScreening = new global::System.Data.DataRelation("FK_Ticket_ToScreening", new global::System.Data.DataColumn[] {
+                        this.tableScreening.IdColumn}, new global::System.Data.DataColumn[] {
+                        this.tableTicket.ScreeningColumn}, false);
+            this.Relations.Add(this.relationFK_Ticket_ToScreening);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1286,7 +1293,7 @@ namespace Cinema {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public FilmRow AddFilmRow(string Title, System.DateTime Year, string Director, System.TimeSpan Duration, string Description) {
+            public FilmRow AddFilmRow(string Title, int Year, string Director, System.TimeSpan Duration, string Description) {
                 FilmRow rowFilmRow = ((FilmRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -1339,7 +1346,7 @@ namespace Cinema {
                 base.Columns.Add(this.columnId);
                 this.columnTitle = new global::System.Data.DataColumn("Title", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTitle);
-                this.columnYear = new global::System.Data.DataColumn("Year", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnYear = new global::System.Data.DataColumn("Year", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnYear);
                 this.columnDirector = new global::System.Data.DataColumn("Director", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDirector);
@@ -2380,7 +2387,7 @@ namespace Cinema {
             
             private global::System.Data.DataColumn columnId;
             
-            private global::System.Data.DataColumn columnShowing;
+            private global::System.Data.DataColumn columnScreening;
             
             private global::System.Data.DataColumn columnHall;
             
@@ -2429,9 +2436,9 @@ namespace Cinema {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public global::System.Data.DataColumn ShowingColumn {
+            public global::System.Data.DataColumn ScreeningColumn {
                 get {
-                    return this.columnShowing;
+                    return this.columnScreening;
                 }
             }
             
@@ -2488,13 +2495,16 @@ namespace Cinema {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public TicketRow AddTicketRow(int Showing, short Hall, int Seat) {
+            public TicketRow AddTicketRow(ScreeningRow parentScreeningRowByFK_Ticket_ToScreening, short Hall, int Seat) {
                 TicketRow rowTicketRow = ((TicketRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
-                        Showing,
+                        null,
                         Hall,
                         Seat};
+                if ((parentScreeningRowByFK_Ticket_ToScreening != null)) {
+                    columnValuesArray[1] = parentScreeningRowByFK_Ticket_ToScreening[0];
+                }
                 rowTicketRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTicketRow);
                 return rowTicketRow;
@@ -2525,7 +2535,7 @@ namespace Cinema {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             internal void InitVars() {
                 this.columnId = base.Columns["Id"];
-                this.columnShowing = base.Columns["Showing"];
+                this.columnScreening = base.Columns["Screening"];
                 this.columnHall = base.Columns["Hall"];
                 this.columnSeat = base.Columns["Seat"];
             }
@@ -2535,8 +2545,8 @@ namespace Cinema {
             private void InitClass() {
                 this.columnId = new global::System.Data.DataColumn("Id", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnId);
-                this.columnShowing = new global::System.Data.DataColumn("Showing", typeof(int), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnShowing);
+                this.columnScreening = new global::System.Data.DataColumn("Screening", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnScreening);
                 this.columnHall = new global::System.Data.DataColumn("Hall", typeof(short), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnHall);
                 this.columnSeat = new global::System.Data.DataColumn("Seat", typeof(int), null, global::System.Data.MappingType.Element);
@@ -2549,7 +2559,7 @@ namespace Cinema {
                 this.columnId.AllowDBNull = false;
                 this.columnId.ReadOnly = true;
                 this.columnId.Unique = true;
-                this.columnShowing.AllowDBNull = false;
+                this.columnScreening.AllowDBNull = false;
                 this.columnHall.AllowDBNull = false;
                 this.columnSeat.AllowDBNull = false;
             }
@@ -2867,9 +2877,9 @@ namespace Cinema {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public System.DateTime Year {
+            public int Year {
                 get {
-                    return ((global::System.DateTime)(this[this.tableFilm.YearColumn]));
+                    return ((int)(this[this.tableFilm.YearColumn]));
                 }
                 set {
                     this[this.tableFilm.YearColumn] = value;
@@ -3070,6 +3080,17 @@ namespace Cinema {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_ScreeningToHall"]);
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public TicketRow[] GetTicketRows() {
+                if ((this.Table.ChildRelations["FK_Ticket_ToScreening"] == null)) {
+                    return new TicketRow[0];
+                }
+                else {
+                    return ((TicketRow[])(base.GetChildRows(this.Table.ChildRelations["FK_Ticket_ToScreening"])));
+                }
+            }
         }
         
         /// <summary>
@@ -3158,12 +3179,12 @@ namespace Cinema {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int Showing {
+            public int Screening {
                 get {
-                    return ((int)(this[this.tableTicket.ShowingColumn]));
+                    return ((int)(this[this.tableTicket.ScreeningColumn]));
                 }
                 set {
-                    this[this.tableTicket.ShowingColumn] = value;
+                    this[this.tableTicket.ScreeningColumn] = value;
                 }
             }
             
@@ -3197,6 +3218,17 @@ namespace Cinema {
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Ticket_ToSeat"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public ScreeningRow ScreeningRow {
+                get {
+                    return ((ScreeningRow)(this.GetParentRow(this.Table.ParentRelations["FK_Ticket_ToScreening"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Ticket_ToScreening"]);
                 }
             }
             
@@ -5559,38 +5591,39 @@ SELECT Id, Film, Time, Price, Hall FROM Screening WHERE (Id = @Id)";
             tableMapping.SourceTable = "Table";
             tableMapping.DataSetTable = "Ticket";
             tableMapping.ColumnMappings.Add("Id", "Id");
-            tableMapping.ColumnMappings.Add("Showing", "Showing");
+            tableMapping.ColumnMappings.Add("Showing", "Screening");
             tableMapping.ColumnMappings.Add("Hall", "Hall");
             tableMapping.ColumnMappings.Add("Seat", "Seat");
+            tableMapping.ColumnMappings.Add("Screening", "Screening");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
-            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Ticket] WHERE (([Id] = @Original_Id) AND ([Showing] = @Origina" +
-                "l_Showing) AND ([Hall] = @Original_Hall) AND ([Seat] = @Original_Seat))";
+            this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Ticket] WHERE (([Id] = @Original_Id) AND ([Screening] = @Origi" +
+                "nal_Screening) AND ([Hall] = @Original_Hall) AND ([Seat] = @Original_Seat))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Showing", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Showing", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Screening", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Screening", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Hall", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Hall", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Seat", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Seat", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Ticket] ([Showing], [Hall], [Seat]) VALUES (@Showing, @Hall, @" +
-                "Seat);\r\nSELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = SCOPE_IDENTITY())" +
-                "";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Ticket] ([Screening], [Hall], [Seat]) VALUES (@Screening, @Hal" +
+                "l, @Seat);\r\nSELECT Id, Screening, Hall, Seat FROM Ticket WHERE (Id = SCOPE_IDENT" +
+                "ITY())";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Showing", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Showing", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Screening", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Screening", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Hall", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Hall", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Seat", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Seat", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Ticket] SET [Showing] = @Showing, [Hall] = @Hall, [Seat] = @Seat WHERE (([Id] = @Original_Id) AND ([Showing] = @Original_Showing) AND ([Hall] = @Original_Hall) AND ([Seat] = @Original_Seat));
-SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Ticket] SET [Screening] = @Screening, [Hall] = @Hall, [Seat] = @Seat WHERE (([Id] = @Original_Id) AND ([Screening] = @Original_Screening) AND ([Hall] = @Original_Hall) AND ([Seat] = @Original_Seat));
+SELECT Id, Screening, Hall, Seat FROM Ticket WHERE (Id = @Id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Showing", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Showing", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Screening", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Screening", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Hall", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Hall", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Seat", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Seat", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Showing", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Showing", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Screening", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Screening", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Hall", global::System.Data.SqlDbType.SmallInt, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Hall", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Seat", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Seat", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
@@ -5609,7 +5642,7 @@ SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT Id, Showing, Hall, Seat FROM dbo.Ticket";
+            this._commandCollection[0].CommandText = "SELECT Id, Screening, Hall, Seat FROM dbo.Ticket";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -5670,9 +5703,9 @@ SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Id, int Original_Showing, short Original_Hall, int Original_Seat) {
+        public virtual int Delete(int Original_Id, int Original_Screening, short Original_Hall, int Original_Seat) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
-            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_Showing));
+            this.Adapter.DeleteCommand.Parameters[1].Value = ((int)(Original_Screening));
             this.Adapter.DeleteCommand.Parameters[2].Value = ((short)(Original_Hall));
             this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_Seat));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
@@ -5695,8 +5728,8 @@ SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int Showing, short Hall, int Seat) {
-            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Showing));
+        public virtual int Insert(int Screening, short Hall, int Seat) {
+            this.Adapter.InsertCommand.Parameters[0].Value = ((int)(Screening));
             this.Adapter.InsertCommand.Parameters[1].Value = ((short)(Hall));
             this.Adapter.InsertCommand.Parameters[2].Value = ((int)(Seat));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
@@ -5719,12 +5752,12 @@ SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int Showing, short Hall, int Seat, int Original_Id, int Original_Showing, short Original_Hall, int Original_Seat, int Id) {
-            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Showing));
+        public virtual int Update(int Screening, short Hall, int Seat, int Original_Id, int Original_Screening, short Original_Hall, int Original_Seat, int Id) {
+            this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(Screening));
             this.Adapter.UpdateCommand.Parameters[1].Value = ((short)(Hall));
             this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(Seat));
             this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_Id));
-            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_Showing));
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_Screening));
             this.Adapter.UpdateCommand.Parameters[5].Value = ((short)(Original_Hall));
             this.Adapter.UpdateCommand.Parameters[6].Value = ((int)(Original_Seat));
             this.Adapter.UpdateCommand.Parameters[7].Value = ((int)(Id));
@@ -5748,8 +5781,8 @@ SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int Showing, short Hall, int Seat, int Original_Id, int Original_Showing, short Original_Hall, int Original_Seat) {
-            return this.Update(Showing, Hall, Seat, Original_Id, Original_Showing, Original_Hall, Original_Seat, Original_Id);
+        public virtual int Update(int Screening, short Hall, int Seat, int Original_Id, int Original_Screening, short Original_Hall, int Original_Seat) {
+            return this.Update(Screening, Hall, Seat, Original_Id, Original_Screening, Original_Hall, Original_Seat, Original_Id);
         }
     }
     
@@ -5984,12 +6017,30 @@ SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateUpdatedRows(CinemaDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._filmTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Film.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._filmTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
             if ((this._hallTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Hall.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
                 if (((updatedRows != null) 
                             && (0 < updatedRows.Length))) {
                     result = (result + this._hallTableAdapter.Update(updatedRows));
+                    allChangedRows.AddRange(updatedRows);
+                }
+            }
+            if ((this._screeningTableAdapter != null)) {
+                global::System.Data.DataRow[] updatedRows = dataSet.Screening.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
+                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
+                if (((updatedRows != null) 
+                            && (0 < updatedRows.Length))) {
+                    result = (result + this._screeningTableAdapter.Update(updatedRows));
                     allChangedRows.AddRange(updatedRows);
                 }
             }
@@ -6011,15 +6062,6 @@ SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._filmTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Film.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._filmTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             if ((this._ticketTableAdapter != null)) {
                 global::System.Data.DataRow[] updatedRows = dataSet.Ticket.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
                 updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
@@ -6038,15 +6080,6 @@ SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
                     allChangedRows.AddRange(updatedRows);
                 }
             }
-            if ((this._screeningTableAdapter != null)) {
-                global::System.Data.DataRow[] updatedRows = dataSet.Screening.Select(null, null, global::System.Data.DataViewRowState.ModifiedCurrent);
-                updatedRows = this.GetRealUpdatedRows(updatedRows, allAddedRows);
-                if (((updatedRows != null) 
-                            && (0 < updatedRows.Length))) {
-                    result = (result + this._screeningTableAdapter.Update(updatedRows));
-                    allChangedRows.AddRange(updatedRows);
-                }
-            }
             return result;
         }
         
@@ -6057,11 +6090,27 @@ SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateInsertedRows(CinemaDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
+            if ((this._filmTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Film.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._filmTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
             if ((this._hallTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Hall.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
                             && (0 < addedRows.Length))) {
                     result = (result + this._hallTableAdapter.Update(addedRows));
+                    allAddedRows.AddRange(addedRows);
+                }
+            }
+            if ((this._screeningTableAdapter != null)) {
+                global::System.Data.DataRow[] addedRows = dataSet.Screening.Select(null, null, global::System.Data.DataViewRowState.Added);
+                if (((addedRows != null) 
+                            && (0 < addedRows.Length))) {
+                    result = (result + this._screeningTableAdapter.Update(addedRows));
                     allAddedRows.AddRange(addedRows);
                 }
             }
@@ -6081,14 +6130,6 @@ SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._filmTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Film.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._filmTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             if ((this._ticketTableAdapter != null)) {
                 global::System.Data.DataRow[] addedRows = dataSet.Ticket.Select(null, null, global::System.Data.DataViewRowState.Added);
                 if (((addedRows != null) 
@@ -6105,14 +6146,6 @@ SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
                     allAddedRows.AddRange(addedRows);
                 }
             }
-            if ((this._screeningTableAdapter != null)) {
-                global::System.Data.DataRow[] addedRows = dataSet.Screening.Select(null, null, global::System.Data.DataViewRowState.Added);
-                if (((addedRows != null) 
-                            && (0 < addedRows.Length))) {
-                    result = (result + this._screeningTableAdapter.Update(addedRows));
-                    allAddedRows.AddRange(addedRows);
-                }
-            }
             return result;
         }
         
@@ -6123,14 +6156,6 @@ SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         private int UpdateDeletedRows(CinemaDBDataSet dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
-            if ((this._screeningTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Screening.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._screeningTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
             if ((this._bookingTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Booking.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
@@ -6144,14 +6169,6 @@ SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._ticketTableAdapter.Update(deletedRows));
-                    allChangedRows.AddRange(deletedRows);
-                }
-            }
-            if ((this._filmTableAdapter != null)) {
-                global::System.Data.DataRow[] deletedRows = dataSet.Film.Select(null, null, global::System.Data.DataViewRowState.Deleted);
-                if (((deletedRows != null) 
-                            && (0 < deletedRows.Length))) {
-                    result = (result + this._filmTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }
@@ -6171,11 +6188,27 @@ SELECT Id, Showing, Hall, Seat FROM Ticket WHERE (Id = @Id)";
                     allChangedRows.AddRange(deletedRows);
                 }
             }
+            if ((this._screeningTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Screening.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._screeningTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
             if ((this._hallTableAdapter != null)) {
                 global::System.Data.DataRow[] deletedRows = dataSet.Hall.Select(null, null, global::System.Data.DataViewRowState.Deleted);
                 if (((deletedRows != null) 
                             && (0 < deletedRows.Length))) {
                     result = (result + this._hallTableAdapter.Update(deletedRows));
+                    allChangedRows.AddRange(deletedRows);
+                }
+            }
+            if ((this._filmTableAdapter != null)) {
+                global::System.Data.DataRow[] deletedRows = dataSet.Film.Select(null, null, global::System.Data.DataViewRowState.Deleted);
+                if (((deletedRows != null) 
+                            && (0 < deletedRows.Length))) {
+                    result = (result + this._filmTableAdapter.Update(deletedRows));
                     allChangedRows.AddRange(deletedRows);
                 }
             }

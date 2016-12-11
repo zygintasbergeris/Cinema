@@ -42,74 +42,83 @@
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(13, 13);
+			this.label1.Location = new System.Drawing.Point(17, 16);
+			this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(39, 13);
+			this.label1.Size = new System.Drawing.Size(48, 16);
 			this.label1.TabIndex = 0;
 			this.label1.Text = "Movie:";
 			// 
 			// label3
 			// 
 			this.label3.AutoSize = true;
-			this.label3.Location = new System.Drawing.Point(13, 40);
+			this.label3.Location = new System.Drawing.Point(17, 49);
+			this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(28, 13);
+			this.label3.Size = new System.Drawing.Size(35, 16);
 			this.label3.TabIndex = 3;
 			this.label3.Text = "Hall:";
 			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(13, 70);
+			this.label2.Location = new System.Drawing.Point(17, 86);
+			this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label2.Name = "label2";
-			this.label2.Size = new System.Drawing.Size(33, 13);
+			this.label2.Size = new System.Drawing.Size(42, 16);
 			this.label2.TabIndex = 5;
 			this.label2.Text = "Time:";
 			// 
 			// price
 			// 
-			this.price.Location = new System.Drawing.Point(87, 92);
+			this.price.Location = new System.Drawing.Point(116, 113);
+			this.price.Margin = new System.Windows.Forms.Padding(4);
 			this.price.Name = "price";
-			this.price.Size = new System.Drawing.Size(201, 20);
+			this.price.Size = new System.Drawing.Size(267, 22);
 			this.price.TabIndex = 8;
 			// 
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(13, 95);
+			this.label4.Location = new System.Drawing.Point(17, 117);
+			this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
 			this.label4.Name = "label4";
-			this.label4.Size = new System.Drawing.Size(31, 13);
+			this.label4.Size = new System.Drawing.Size(39, 16);
 			this.label4.TabIndex = 7;
 			this.label4.Text = "Price";
 			// 
 			// title
 			// 
 			this.title.FormattingEnabled = true;
-			this.title.Location = new System.Drawing.Point(87, 10);
+			this.title.Location = new System.Drawing.Point(116, 12);
+			this.title.Margin = new System.Windows.Forms.Padding(4);
 			this.title.Name = "title";
-			this.title.Size = new System.Drawing.Size(201, 21);
+			this.title.Size = new System.Drawing.Size(267, 24);
 			this.title.TabIndex = 9;
 			// 
 			// hall
 			// 
 			this.hall.FormattingEnabled = true;
-			this.hall.Location = new System.Drawing.Point(87, 37);
+			this.hall.Location = new System.Drawing.Point(116, 46);
+			this.hall.Margin = new System.Windows.Forms.Padding(4);
 			this.hall.Name = "hall";
-			this.hall.Size = new System.Drawing.Size(201, 21);
+			this.hall.Size = new System.Drawing.Size(267, 24);
 			this.hall.TabIndex = 10;
 			// 
 			// time
 			// 
-			this.time.Location = new System.Drawing.Point(87, 64);
+			this.time.Location = new System.Drawing.Point(116, 79);
+			this.time.Margin = new System.Windows.Forms.Padding(4);
 			this.time.Name = "time";
-			this.time.Size = new System.Drawing.Size(201, 20);
+			this.time.Size = new System.Drawing.Size(267, 22);
 			this.time.TabIndex = 11;
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(16, 118);
+			this.button1.Location = new System.Drawing.Point(21, 145);
+			this.button1.Margin = new System.Windows.Forms.Padding(4);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(272, 23);
+			this.button1.Size = new System.Drawing.Size(363, 28);
 			this.button1.TabIndex = 12;
 			this.button1.Text = "Add screening";
 			this.button1.UseVisualStyleBackColor = true;
@@ -117,9 +126,9 @@
 			// 
 			// AddScreeningForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(305, 147);
+			this.ClientSize = new System.Drawing.Size(407, 181);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.time);
 			this.Controls.Add(this.hall);
@@ -129,8 +138,10 @@
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label3);
 			this.Controls.Add(this.label1);
+			this.Margin = new System.Windows.Forms.Padding(4);
 			this.Name = "AddScreeningForm";
 			this.Text = "AddScreeningForm";
+			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AddScreeningForm_FormClosing);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
