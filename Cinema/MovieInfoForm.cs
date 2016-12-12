@@ -12,14 +12,14 @@ namespace Cinema
 {
 	public partial class MovieInfoForm : Form
 	{
-		public MovieInfoForm(Film film)
+		public MovieInfoForm(Movie movie)
 		{
 			InitializeComponent();
-			title.Text = film.Title;
-			year.Text = film.Year.ToString();
-			director.Text = film.Director;
-			duration.Text = film.Duration.ToString();
-			decription.Text = film.Description;
+			title.Text = movie.Title;
+			year.Text = movie.Year.ToString();
+			director.Text = movie.Director;
+			duration.Text = movie.Duration.ToString();
+			decription.Text = movie.Description;
 		}
 	}
 }

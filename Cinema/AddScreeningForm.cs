@@ -14,30 +14,29 @@ namespace Cinema
 {
 	public partial class AddScreeningForm : Form
 	{
-		private Entities tables;
+		private CinemaDBEntities tables;
 		private Screening screening;
 
 		public AddScreeningForm()
 		{
 			InitializeComponent();
-			tables = new Entities();
+			tables = new CinemaDBEntities();
 			screening = new Screening();
 			foreach (var hall in tables.Halls)
 			{
 				this.hall.Items.Add(hall.Id);
 			}
-			foreach (var film in tables.Films)
+			foreach (var movie in tables.Movies)
 			{
-				this.title.Items.Add(film.Title);
+				this.title.Items.Add(movie.Title);
 			}
 		}
 		public AddScreeningForm(Screening screening)
 		{
 			InitializeComponent();
-			tables = new Entities();
+			tables = new CinemaDBEntities();
 			this.screening = screening;
-			title.Items.Add((tables.Films.Where(x => x.Id.Equals(screening.Film))).FirstOrDefault().Title);
-			price.Text = screening.Price.ToString();
+			title.Items.Add((tables.Movies.Where(x => x.Id.Equals(screening.Movie))).FirstOrDefault().Title);
 			time.Value = screening.Time;
 			hall.Items.Add(screening.Hall);
 			this.Text = "Edit screening";
@@ -46,13 +45,9 @@ namespace Cinema
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			Regex pattern = new Regex(@"^\d{1,}.{0,2}$");
-			if (!pattern.IsMatch(price.Text) || Convert.ToDecimal(price.Text) < 0)
-				MessageBox.Show("Invalid price. Use format XX.XX");
-			screening.Price = Convert.ToDecimal(price.Text);
 			screening.Time = time.Value;
 			screening.Hall = (short)hall.SelectedItem;
-			screening.Film = (tables.Films.Where(x => x.Title.Equals((string) title.SelectedItem))).FirstOrDefault().Id;
+			screening.Movie = (tables.Movies.Where(x => x.Title.Equals((string) title.SelectedItem))).FirstOrDefault().Id;
 			tables.Screenings.AddOrUpdate(screening);
 			tables.SaveChanges();
 			this.Close();

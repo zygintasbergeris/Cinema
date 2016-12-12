@@ -13,12 +13,12 @@ namespace Cinema
 {
 	public partial class AdminForm : Form
 	{
-		private Entities tables;
+		private CinemaDBEntities tables;
 
 		public AdminForm()
 		{
 			InitializeComponent();
-			tables = new Entities();
+			tables = new CinemaDBEntities();
 		}
 
 		private void AdminForm_Load(object sender, EventArgs e)
@@ -31,8 +31,8 @@ namespace Cinema
 				this.bookingTableAdapter.Fill(this.cinemaDBDataSet.Booking);
 				// TODO: This line of code loads data into the 'cinemaDBDataSet.Ticket' table. You can move, or remove it, as needed.
 				this.ticketTableAdapter.Fill(this.cinemaDBDataSet.Ticket);
-				// TODO: This line of code loads data into the 'cinemaDBDataSet.Film' table. You can move, or remove it, as needed.
-				this.filmTableAdapter.Fill(this.cinemaDBDataSet.Film);
+				// TODO: This line of code loads data into the 'cinemaDBDataSet.Movie' table. You can move, or remove it, as needed.
+				this.movieTableAdapter.Fill(this.cinemaDBDataSet.Movie);
 				// TODO: This line of code loads data into the 'cinemaDBDataSet.Screening' table. You can move, or remove it, as needed.
 				this.screeningTableAdapter.Fill(this.cinemaDBDataSet.Screening);
 				// TODO: This line of code loads data into the 'cinemaDBDataSet.Hall' table. You can move, or remove it, as needed.
@@ -51,9 +51,9 @@ namespace Cinema
 				MessageBox.Show("No movie selected");
 				return;
 			}
-			int id = (int)movies.SelectedRows[0].Cells[0].Value;
-			Film film = (tables.Films.Where(x => x.Id.Equals(id))).FirstOrDefault();
-			MovieInfoForm movieInfo = new MovieInfoForm(film);
+			int id = (int) movies.SelectedRows[0].Cells[0].Value;
+			Movie movie = (tables.Movies.Where(x => x.Id.Equals(id))).FirstOrDefault();
+			MovieInfoForm movieInfo = new MovieInfoForm(movie);
 			movieInfo.Show();
 		}
 
@@ -67,13 +67,13 @@ namespace Cinema
 		private void updateMovie_Click(object sender, EventArgs e)
 		{
 			if (movies.SelectedRows.Count == 0)
-			{ 
+			{
 				MessageBox.Show("No movie selected");
 				return;
 			}
-			int id = (int)movies.SelectedRows[0].Cells[0].Value;
-			Film film = (tables.Films.Where(x => x.Id.Equals(id))).FirstOrDefault();
-			AddMovieForm movieForm = new AddMovieForm(film);
+			int id = (int) movies.SelectedRows[0].Cells[0].Value;
+			Movie movie = (tables.Movies.Where(x => x.Id.Equals(id))).FirstOrDefault();
+			AddMovieForm movieForm = new AddMovieForm(movie);
 			movieForm.Show();
 			movieForm.Closing += (x, args) => AdminForm_Load(this, new EventArgs());
 		}
@@ -85,9 +85,17 @@ namespace Cinema
 				MessageBox.Show("No movie selected");
 				return;
 			}
-			int id = (int)movies.SelectedRows[0].Cells[0].Value;
-			tables.Films.Remove((tables.Films.Where(x => x.Id.Equals(id))).FirstOrDefault());
-			tables.SaveChanges();
+			int id = (int) movies.SelectedRows[0].Cells[0].Value;
+			try
+			{
+				tables.Movies.Remove((tables.Movies.Where(x => x.Id.Equals(id))).FirstOrDefault());
+				tables.SaveChanges();
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("Can't remove movie. Selected movie has planed screenings");
+			}
+
 			AdminForm_Load(this, new EventArgs());
 		}
 
@@ -119,9 +127,17 @@ namespace Cinema
 				MessageBox.Show("No screening selected");
 				return;
 			}
-			int id = (int)screenings.SelectedRows[0].Cells[0].Value;
-			tables.Screenings.Remove((tables.Screenings.Where(x => x.Id.Equals(id))).FirstOrDefault());
-			tables.SaveChanges();
+			int id = (int) screenings.SelectedRows[0].Cells[0].Value;
+			try
+			{
+				tables.Screenings.Remove((tables.Screenings.Where(x => x.Id.Equals(id))).FirstOrDefault());
+				tables.SaveChanges();
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("Can't remove screening. Selected screening has sold tickets");
+			}
+			
 			AdminForm_Load(this, new EventArgs());
 		}
 
@@ -139,7 +155,7 @@ namespace Cinema
 				MessageBox.Show("No hall selected");
 				return;
 			}
-			short id = (short)halls.SelectedRows[0].Cells[0].Value;
+			short id = (short) halls.SelectedRows[0].Cells[0].Value;
 			Hall hall = (tables.Halls.Where(x => x.Id.Equals(id))).FirstOrDefault();
 			AddHallForm hallForm = new AddHallForm(hall);
 			hallForm.Show();
@@ -153,9 +169,17 @@ namespace Cinema
 				MessageBox.Show("No hall selected");
 				return;
 			}
-			short id = (short)screenings.SelectedRows[0].Cells[0].Value;
-			tables.Halls.Remove((tables.Halls.Where(x => x.Id.Equals(id))).FirstOrDefault());
-			tables.SaveChanges();
+			short id = (short) halls.SelectedRows[0].Cells[0].Value;
+			try
+			{
+				tables.Halls.Remove((tables.Halls.Where(x => x.Id.Equals(id))).FirstOrDefault());
+				tables.SaveChanges();
+			}
+			catch (Exception)
+			{
+				MessageBox.Show("Can't remove hall. Selected hall has planed screenings");
+			}
+		
 			AdminForm_Load(this, new EventArgs());
 		}
 
@@ -208,13 +232,13 @@ namespace Cinema
 
 		private void searchMoviesButton_Click(object sender, EventArgs e)
 		{
-			filmBindingSource.ResetBindings(false);
+			movieBindingSource.ResetBindings(false);
 			var results = CineamaSearchService.SearchMovies(tables, searchMovies.Text);
 			if (results.Count() != 0)
 			{
-				filmBindingSource.DataSource = 
+				movieBindingSource.DataSource = 
 					results.Select(movie => new {movie.Id, movie.Title, movie.Year, movie.Director, movie.Duration}).ToList();
-				movies.DataSource = filmBindingSource;
+				movies.DataSource = movieBindingSource;
 			}
 		}
 
@@ -225,7 +249,7 @@ namespace Cinema
 			if (results.Count() != 0)
 			{
 				screeningBindingSource.DataSource =
-					results.Select(screening => new {screening.Id, screening.Film, screening.Time, screening.Price, screening.Hall}).ToList();
+					results.Select(screening => new {screening.Id, screening.Movie, screening.Time, screening.Hall}).ToList();
 				screenings.DataSource = screeningBindingSource;
 			}
 		}
@@ -248,7 +272,7 @@ namespace Cinema
 			if (results.Count() != 0)
 			{
 				ticketBindingSource.DataSource =
-					results.Select(ticket => new {ticket.Id, ticket.Screening, ticket.Hall, ticket.Seat}).ToList();
+					results.Select(ticket => new {ticket.Id, ticket.Screening, ticket.Hall, ticket.Seat, ticket.Price}).ToList();
 				tickets.DataSource = ticketBindingSource;
 			}
 		}
@@ -260,7 +284,7 @@ namespace Cinema
 			if (results.Count() != 0)
 			{
 				clientBindingSource.DataSource =
-					results.Select(client => new {client.Id, client.FirstName, client.LastName, client.DateOfBirth}).ToList();
+					results.Select(client => new {client.Id, client.FirstName, client.LastName, client.DateOfBirth, client.Email}).ToList();
 				clients.DataSource = clientBindingSource;
 			}
 		}
@@ -290,9 +314,9 @@ namespace Cinema
 		private void RefreshMovies()
 		{
 			searchMovies.Clear();
-			filmBindingSource.ResetBindings(false);
-			filmBindingSource.DataSource = cinemaDBDataSet;
-			filmBindingSource.DataMember = "Film";
+			movieBindingSource.ResetBindings(false);
+			movieBindingSource.DataSource = cinemaDBDataSet;
+			movieBindingSource.DataMember = "Movie";
 		}
 
 		private void RefreshTickets()
@@ -326,5 +350,10 @@ namespace Cinema
 			hallBindingSource.DataSource = cinemaDBDataSet;
 			hallBindingSource.DataMember = "Hall";
 		}
+		/*
+		 * Regex pattern = new Regex(@"^\d{1,}.{0,2}$");
+			if (!pattern.IsMatch(price.Text) || Convert.ToDecimal(price.Text) < 0)
+				MessageBox.Show("Invalid price. Use format XX.XX");
+				*/
 	}
 }

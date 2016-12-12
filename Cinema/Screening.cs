@@ -21,13 +21,12 @@ namespace Cinema
         }
     
         public int Id { get; set; }
-        public int Film { get; set; }
+        public int Movie { get; set; }
         public System.DateTime Time { get; set; }
-        public decimal Price { get; set; }
         public short Hall { get; set; }
     
-        public virtual Film Film1 { get; set; }
         public virtual Hall Hall1 { get; set; }
+        public virtual Movie Movie1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ticket> Tickets { get; set; }
     }

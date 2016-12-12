@@ -14,28 +14,28 @@ namespace Cinema
 {
 	public partial class AddMovieForm : Form
 	{
-		private Entities tables;
-		Film film;
+		private CinemaDBEntities tables;
+		Movie movie;
 
 		public AddMovieForm()
 		{
 			InitializeComponent();
-			tables = new Entities();
-			film = new Film();
+			tables = new CinemaDBEntities();
+			movie = new Movie();
 		}
 
-		public AddMovieForm(Film film)
+		public AddMovieForm(Movie movie)
 		{
 			InitializeComponent();
 			this.Text = "Edit movie";
 			button1.Text = "Edit movie";
-			title.Text = film.Title;
-			director.Text = film.Director;
-			year.Text = film.Year.ToString();
-			duration.Text = film.Duration.Hours + ":" + film.Duration.Minutes;
-			description.Text = film.Description;
-			tables = new Entities();
-			this.film = film;
+			title.Text = movie.Title;
+			director.Text = movie.Director;
+			year.Text = movie.Year.ToString();
+			duration.Text = movie.Duration.Hours + ":" + movie.Duration.Minutes;
+			description.Text = movie.Description;
+			tables = new CinemaDBEntities();
+			this.movie = movie;
 		}
 
 		private void button1_Click(object sender, EventArgs e)
@@ -52,13 +52,13 @@ namespace Cinema
 				MessageBox.Show("Invalid duration. Use Format H:MM");
 				return;
 			}
-			film.Description = description.Text;
-			film.Director = director.Text;
-			film.Title = title.Text;
-			film.Year = Convert.ToInt32(year.Text);
+			movie.Description = description.Text;
+			movie.Director = director.Text;
+			movie.Title = title.Text;
+			movie.Year = Convert.ToInt32(year.Text);
 			string[] str = duration.Text.Split(':');
-			film.Duration = new TimeSpan(Convert.ToInt32(str[0]), Convert.ToInt32(str[1]), 0);
-			tables.Films.AddOrUpdate(film);
+			movie.Duration = new TimeSpan(Convert.ToInt32(str[0]), Convert.ToInt32(str[1]), 0);
+			tables.Movies.AddOrUpdate(movie);
 			tables.SaveChanges();
 			this.Close();
 		}

@@ -13,10 +13,10 @@ namespace Cinema
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class CinemaDBEntities : DbContext
     {
-        public Entities()
-            : base("name=Entities")
+        public CinemaDBEntities()
+            : base("name=CinemaDBEntities")
         {
         }
     
@@ -27,8 +27,8 @@ namespace Cinema
     
         public virtual DbSet<Booking> Bookings { get; set; }
         public virtual DbSet<Client> Clients { get; set; }
-        public virtual DbSet<Film> Films { get; set; }
         public virtual DbSet<Hall> Halls { get; set; }
+        public virtual DbSet<Movie> Movies { get; set; }
         public virtual DbSet<Screening> Screenings { get; set; }
         public virtual DbSet<Seat> Seats { get; set; }
         public virtual DbSet<Ticket> Tickets { get; set; }

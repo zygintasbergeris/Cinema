@@ -24,6 +24,7 @@ namespace Cinema
         public int Screening { get; set; }
         public short Hall { get; set; }
         public int Seat { get; set; }
+        public decimal Price { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }

@@ -13,20 +13,20 @@ namespace Cinema
 {
 	public partial class AddHallForm : Form
 	{
-		private Entities tables;
+		private CinemaDBEntities tables;
 		Hall hall;
 
 		public AddHallForm()
 		{
 			InitializeComponent();
-			tables = new Entities();
+			tables = new CinemaDBEntities();
 			hall = new Hall();
 		}
 
 		public AddHallForm(Hall hall)
 		{
 			InitializeComponent();
-			tables = new Entities();
+			tables = new CinemaDBEntities();
 			textBox1.Text = hall.NumberOfSeats.ToString();
 			this.Text = "Edit hall";
 			button1.Text = "Edit hall";

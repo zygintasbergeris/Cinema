@@ -37,6 +37,8 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.date = new System.Windows.Forms.DateTimePicker();
 			this.button1 = new System.Windows.Forms.Button();
+			this.email = new System.Windows.Forms.TextBox();
+			this.label5 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -90,7 +92,7 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(13, 136);
+			this.label4.Location = new System.Drawing.Point(13, 172);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(68, 13);
 			this.label4.TabIndex = 6;
@@ -99,7 +101,7 @@
 			// date
 			// 
 			this.date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-			this.date.Location = new System.Drawing.Point(12, 152);
+			this.date.Location = new System.Drawing.Point(12, 188);
 			this.date.MaxDate = new System.DateTime(2016, 12, 10, 0, 0, 0, 0);
 			this.date.Name = "date";
 			this.date.Size = new System.Drawing.Size(167, 20);
@@ -108,7 +110,7 @@
 			// 
 			// button1
 			// 
-			this.button1.Location = new System.Drawing.Point(12, 179);
+			this.button1.Location = new System.Drawing.Point(12, 215);
 			this.button1.Name = "button1";
 			this.button1.Size = new System.Drawing.Size(167, 23);
 			this.button1.TabIndex = 8;
@@ -116,11 +118,29 @@
 			this.button1.UseVisualStyleBackColor = true;
 			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
-			// Signup
+			// email
+			// 
+			this.email.Location = new System.Drawing.Point(12, 149);
+			this.email.Name = "email";
+			this.email.Size = new System.Drawing.Size(167, 20);
+			this.email.TabIndex = 10;
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(13, 133);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(35, 13);
+			this.label5.TabIndex = 9;
+			this.label5.Text = "Email:";
+			// 
+			// SignupForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(191, 212);
+			this.ClientSize = new System.Drawing.Size(191, 244);
+			this.Controls.Add(this.email);
+			this.Controls.Add(this.label5);
 			this.Controls.Add(this.button1);
 			this.Controls.Add(this.date);
 			this.Controls.Add(this.label4);
@@ -130,7 +150,7 @@
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.Fname);
 			this.Controls.Add(this.label1);
-			this.Name = "Signup";
+			this.Name = "SignupForm";
 			this.Text = "Sign up";
 			this.ResumeLayout(false);
 			this.PerformLayout();
@@ -148,5 +168,7 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.DateTimePicker date;
 		private System.Windows.Forms.Button button1;
+		private System.Windows.Forms.TextBox email;
+		private System.Windows.Forms.Label label5;
 	}
 }

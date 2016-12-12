@@ -37,12 +37,12 @@ namespace Cinema
 			using (SqlConnection connection =new SqlConnection(
 						@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CinemaDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
 			{
-				SqlDataAdapter adapter = new SqlDataAdapter("Select Id, password From Client WHERE Id = @ID", connection);
-				adapter.SelectCommand.Parameters.AddWithValue("@ID", username.Text);
+				SqlDataAdapter adapter = new SqlDataAdapter("Select Email, password From Client WHERE Email = @E", connection);
+				adapter.SelectCommand.Parameters.AddWithValue("@E", username.Text);
 				DataSet set = new DataSet();
 				adapter.Fill(set, "Client");
 				if (set.Tables[0].Rows.Count == 0)
-					MessageBox.Show("Client not found");
+					MessageBox.Show("Email doesn't match");
 				else
 				{
 					if (set.Tables[0].Rows[0]["Password"].ToString() == password.Text)
@@ -67,6 +67,10 @@ namespace Cinema
 				AdminForm adminf = new AdminForm();
 				adminf.Show();
 				adminf.Closing += (x, args) => this.Close();
+			}
+			else
+			{
+				MessageBox.Show("Password doesn't match");
 			}
 		}
 

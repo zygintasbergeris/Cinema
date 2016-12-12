@@ -25,6 +25,7 @@ namespace Cinema
         public string LastName { get; set; }
         public System.DateTime DateOfBirth { get; set; }
         public string Password { get; set; }
+        public string Email { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Booking> Bookings { get; set; }
