@@ -93,6 +93,7 @@
     <Compile Include="BuyTicketFormcs.Designer.cs">
       <DependentUpon>BuyTicketFormcs.cs</DependentUpon>
     </Compile>
+    <Compile Include="CineamaSearchService.cs" />
     <Compile Include="CinemaDBDataSet.cs">
       <DependentUpon>CinemaDBDataSet.xsd</DependentUpon>
     </Compile>

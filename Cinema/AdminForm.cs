@@ -209,12 +209,7 @@ namespace Cinema
 		private void searchMoviesButton_Click(object sender, EventArgs e)
 		{
 			filmBindingSource.ResetBindings(false);
-			var results = tables.Films.Where(movie => (movie.Title.Contains(searchMovies.Text)) ||
-													  (movie.Description.Contains(searchMovies.Text)) ||
-													  (movie.Director.Contains(searchMovies.Text)) ||
-													  (movie.Duration.ToString().Contains(searchMovies.Text)) ||
-													  (movie.Year.ToString().Equals(searchMovies.Text)) ||
-													  (movie.Id.ToString().Equals(searchMovies.Text)));
+			var results = CineamaSearchService.SearchMovies(tables, searchMovies.Text);
 			if (results.Count() != 0)
 			{
 				filmBindingSource.DataSource = 
@@ -226,11 +221,7 @@ namespace Cinema
 		private void searchScreeningsButton_Click(object sender, EventArgs e)
 		{
 			screeningBindingSource.ResetBindings(false);
-			var results = tables.Screenings.Where(screening => (screening.Id.ToString().Equals(searchScreenings.Text)) ||
-															  (screening.Film.ToString().Equals(searchScreenings.Text)) ||
-									                          (screening.Hall.ToString().Equals(searchScreenings.Text)) ||
-									                          (screening.Price.ToString().Equals(searchScreenings.Text)) ||
-									                          (screening.Time.ToString().Contains(searchScreenings.Text)));
+			var results = CineamaSearchService.SearchScreenings(tables, searchScreenings.Text);
 			if (results.Count() != 0)
 			{
 				screeningBindingSource.DataSource =
@@ -242,8 +233,7 @@ namespace Cinema
 		private void searchHallsButton_Click(object sender, EventArgs e)
 		{
 			hallBindingSource.ResetBindings(false);
-			var results = tables.Halls.Where(hall => (hall.Id.ToString().Equals(searchHalls.Text)) ||
-			                                        (hall.NumberOfSeats.ToString().Equals(searchHalls.Text)));
+			var results = CineamaSearchService.SearchHalls(tables, searchHalls.Text);
 			if (results.Count() != 0)
 			{
 				hallBindingSource.DataSource = results.Select(hall => new {hall.Id, hall.NumberOfSeats}).ToList();
@@ -254,10 +244,7 @@ namespace Cinema
 		private void searchTicketsButton_Click(object sender, EventArgs e)
 		{
 			ticketBindingSource.ResetBindings(false);
-			var results = tables.Tickets.Where(ticket => (ticket.Id.ToString().Equals(searchScreenings.Text)) ||
-			                                            (ticket.Hall.ToString().Equals(searchScreenings.Text)) ||
-			                                            (ticket.Seat.ToString().Equals(searchScreenings.Text)) ||
-			                                            (ticket.Screening.ToString().Equals(searchScreenings.Text)));
+			var results = CineamaSearchService.SearchTickets(tables, searchTickets.Text);
 			if (results.Count() != 0)
 			{
 				ticketBindingSource.DataSource =
@@ -269,10 +256,7 @@ namespace Cinema
 		private void searchClientsButton_Click(object sender, EventArgs e)
 		{
 			clientBindingSource.ResetBindings(false);
-			var results = tables.Clients.Where(client => (client.Id.ToString().Equals(searchClients.Text)) ||
-			                                            (client.DateOfBirth.ToShortDateString().Contains(searchClients.Text)) ||
-			                                            (client.FirstName.Contains(searchClients.Text)) ||
-			                                            (client.LastName.Contains(searchClients.Text)));
+			var results = CineamaSearchService.SearchClients(tables, searchClients.Text);
 			if (results.Count() != 0)
 			{
 				clientBindingSource.DataSource =
