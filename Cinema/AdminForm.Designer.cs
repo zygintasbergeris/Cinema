@@ -48,7 +48,6 @@
 			this.searchHalls = new System.Windows.Forms.TextBox();
 			this.searchHallsButton = new System.Windows.Forms.Button();
 			this.button9 = new System.Windows.Forms.Button();
-			this.button8 = new System.Windows.Forms.Button();
 			this.button7 = new System.Windows.Forms.Button();
 			this.halls = new System.Windows.Forms.DataGridView();
 			this.tabPage4 = new System.Windows.Forms.TabPage();
@@ -313,7 +312,6 @@
 			this.tabPage3.Controls.Add(this.searchHalls);
 			this.tabPage3.Controls.Add(this.searchHallsButton);
 			this.tabPage3.Controls.Add(this.button9);
-			this.tabPage3.Controls.Add(this.button8);
 			this.tabPage3.Controls.Add(this.button7);
 			this.tabPage3.Controls.Add(this.halls);
 			this.tabPage3.Location = new System.Drawing.Point(4, 22);
@@ -343,23 +341,13 @@
 			// 
 			// button9
 			// 
-			this.button9.Location = new System.Drawing.Point(324, 31);
+			this.button9.Location = new System.Drawing.Point(165, 31);
 			this.button9.Name = "button9";
 			this.button9.Size = new System.Drawing.Size(162, 23);
 			this.button9.TabIndex = 3;
 			this.button9.Text = "Remove selected hall";
 			this.button9.UseVisualStyleBackColor = true;
 			this.button9.Click += new System.EventHandler(this.deleteHall_Click);
-			// 
-			// button8
-			// 
-			this.button8.Location = new System.Drawing.Point(165, 31);
-			this.button8.Name = "button8";
-			this.button8.Size = new System.Drawing.Size(153, 23);
-			this.button8.TabIndex = 2;
-			this.button8.Text = "Update selected hall";
-			this.button8.UseVisualStyleBackColor = true;
-			this.button8.Click += new System.EventHandler(this.updateHall_Click);
 			// 
 			// button7
 			// 
@@ -834,7 +822,6 @@
 		private System.Windows.Forms.Button button5;
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.Button button9;
-		private System.Windows.Forms.Button button8;
 		private System.Windows.Forms.Button button7;
 		private System.Windows.Forms.TabPage tabPage4;
 		private System.Windows.Forms.DataGridView tickets;

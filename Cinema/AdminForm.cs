@@ -148,20 +148,6 @@ namespace Cinema
 			hallForm.Closing += (x, args) => AdminForm_Load(this, new EventArgs());
 		}
 
-		private void updateHall_Click(object sender, EventArgs e)
-		{
-			if (halls.SelectedRows.Count == 0)
-			{
-				MessageBox.Show("No hall selected");
-				return;
-			}
-			short id = (short) halls.SelectedRows[0].Cells[0].Value;
-			Hall hall = (tables.Halls.Where(x => x.Id.Equals(id))).FirstOrDefault();
-			AddHallForm hallForm = new AddHallForm(hall);
-			hallForm.Show();
-			hallForm.Closing += (x, args) => AdminForm_Load(this, new EventArgs());
-		}
-
 		private void deleteHall_Click(object sender, EventArgs e)
 		{
 			if (halls.SelectedRows.Count == 0)
