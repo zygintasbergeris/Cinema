@@ -82,7 +82,10 @@
 			// 
 			// time
 			// 
+			this.time.CustomFormat = "yyyy-MM-dd HH:mm";
+			this.time.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
 			this.time.Location = new System.Drawing.Point(87, 64);
+			this.time.MinDate = new System.DateTime(2016, 12, 10, 0, 0, 0, 0);
 			this.time.Name = "time";
 			this.time.Size = new System.Drawing.Size(201, 20);
 			this.time.TabIndex = 11;

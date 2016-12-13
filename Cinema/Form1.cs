@@ -48,7 +48,9 @@ namespace Cinema
 					if (set.Tables[0].Rows[0]["Password"].ToString() == password.Text)
 					{
 						this.Hide();
-						UserForm userf = new UserForm();
+						int id = (int)set.Tables[0].Rows[0]["Id"];
+						Client client = ((new CinemaDBEntities()).Clients.Where(x => x.Id.Equals(id))).FirstOrDefault();
+						UserForm userf = new UserForm(client);
 						userf.Show();
 						userf.Closing += (x, args) => this.Close();
 					}
