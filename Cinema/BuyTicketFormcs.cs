@@ -16,5 +16,10 @@ namespace Cinema
 		{
 			InitializeComponent();
 		}
+
+		public BuyTicketForm(Screening screening)
+		{
+			InitializeComponent();
+		}
 	}
 }
