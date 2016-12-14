@@ -26,7 +26,7 @@ namespace Cinema
 			{
 				Fname.Text = client.FirstName;
 				Lname.Text = client.LastName;
-				Pass.Text = client.Password;
+				pass.Text = client.Password;
 				date.Value = client.DateOfBirth;
 				email.Text = client.Email;
 				tables.Clients.Remove((tables.Clients.Where(x => x.Id.Equals(client.Id))).FirstOrDefault());
@@ -38,7 +38,8 @@ namespace Cinema
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			if (Fname.Text.Length == 0 || Lname.Text.Length == 0 || Pass.Text.Length == 0 || !date.Checked)
+			if (Fname.Text.Length == 0 || Lname.Text.Length == 0 || pass.Text.Length == 0 || !date.Checked || 
+				email.Text.Length == 0 || repass.Text.Length == 0)
 			{
 				MessageBox.Show("One or more fields not entered");
 				return;
@@ -52,7 +53,11 @@ namespace Cinema
 				MessageBox.Show("Invalid email");
 				return;
 			}
-			
+			if (!pass.Text.Equals(repass.Text))
+			{
+				MessageBox.Show("Passwords don't match");
+				return;
+			}
 			using (SqlConnection connection = new SqlConnection(
 					@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CinemaDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
 			{
@@ -72,7 +77,7 @@ namespace Cinema
 				DataRow newRow = ds.Tables[0].NewRow();
 				newRow["FirstName"] = Fname.Text;
 				newRow["LastName"] = Lname.Text;
-				newRow["Password"] = Pass.Text;
+				newRow["Password"] = pass.Text;
 				newRow["DateOfBirth"] = date.Value;
 				newRow["Email"] = email.Text;
 				ds.Tables[0].Rows.Add(newRow);

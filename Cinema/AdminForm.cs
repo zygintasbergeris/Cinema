@@ -336,10 +336,6 @@ namespace Cinema
 			hallBindingSource.DataSource = cinemaDBDataSet;
 			hallBindingSource.DataMember = "Hall";
 		}
-		/*
-		 * Regex pattern = new Regex(@"^\d{1,}.{0,2}$");
-			if (!pattern.IsMatch(price.Text) || Convert.ToDecimal(price.Text) < 0)
-				MessageBox.Show("Invalid price. Use format XX.XX");
-				*/
+		
 	}
 }

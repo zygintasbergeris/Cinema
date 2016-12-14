@@ -137,6 +137,7 @@
     <Compile Include="Client.cs">
       <DependentUpon>CinemaModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Extension.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

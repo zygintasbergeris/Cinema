@@ -45,7 +45,7 @@ namespace Cinema
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			screening.Time = time.Value;
+			screening.Time = time.Value; 
 			screening.Hall = (short)hall.SelectedItem;
 			screening.Movie = (tables.Movies.Where(x => x.Title.Equals((string) title.SelectedItem))).FirstOrDefault().Id;
 			tables.Screenings.AddOrUpdate(screening);

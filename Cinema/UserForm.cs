@@ -29,7 +29,7 @@ namespace Cinema
 			// TODO: This line of code loads data into the 'cinemaDBDataSet.Movie' table. You can move, or remove it, as needed.
 			this.movieTableAdapter.Fill(this.cinemaDBDataSet.Movie);
 			var screeningsMovies = tables.Screenings.Join(tables.Movies, s => s.Movie, m => m.Id,
-				(s, m) => new {s.Id, s.Movie, m.Title, s.Time, s.Hall});
+				(s, m) => new {s.Id, s.Movie, m.Title, s.Time, s.Hall}).OrderBy((s) => s.Time).Select(s => s.Time >= DateTime.Now);
 			screeningBindingSource.ResetBindings(false);
 			screeningBindingSource.DataSource = screeningsMovies.ToList();
 			screenings.DataSource = screeningBindingSource;
