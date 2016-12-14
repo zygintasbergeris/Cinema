@@ -28,11 +28,12 @@ namespace Cinema
 			this.screeningTableAdapter.Fill(this.cinemaDBDataSet.Screening);
 			// TODO: This line of code loads data into the 'cinemaDBDataSet.Movie' table. You can move, or remove it, as needed.
 			this.movieTableAdapter.Fill(this.cinemaDBDataSet.Movie);
-			foreach (var row in screenings.Rows)
-			{
-				//add movie name to screenings (use Join Linq)
-				//order by date
-			}
+			var screeningsMovies = tables.Screenings.Join(tables.Movies, s => s.Movie, m => m.Id,
+				(s, m) => new {s.Id, s.Movie, m.Title, s.Time, s.Hall});
+			screeningBindingSource.ResetBindings(false);
+			screeningBindingSource.DataSource = screeningsMovies.ToList();
+			screenings.DataSource = screeningBindingSource;
+			//screenings.Columns["Id"].Visible = false;
 		}
 
 		private void movies_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)

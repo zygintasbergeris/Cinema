@@ -37,7 +37,7 @@ namespace Cinema
 			using (SqlConnection connection =new SqlConnection(
 						@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=CinemaDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"))
 			{
-				SqlDataAdapter adapter = new SqlDataAdapter("Select Email, password From Client WHERE Email = @E", connection);
+				SqlDataAdapter adapter = new SqlDataAdapter("Select Id, Email, password From Client WHERE Email = @E", connection);
 				adapter.SelectCommand.Parameters.AddWithValue("@E", username.Text);
 				DataSet set = new DataSet();
 				adapter.Fill(set, "Client");
@@ -48,7 +48,7 @@ namespace Cinema
 					if (set.Tables[0].Rows[0]["Password"].ToString() == password.Text)
 					{
 						this.Hide();
-						int id = (int)set.Tables[0].Rows[0]["Id"];
+						int id = (int) set.Tables[0].Rows[0]["Id"];
 						Client client = ((new CinemaDBEntities()).Clients.Where(x => x.Id.Equals(id))).FirstOrDefault();
 						UserForm userf = new UserForm(client);
 						userf.Show();
