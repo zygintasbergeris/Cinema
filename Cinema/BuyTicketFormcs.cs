@@ -14,16 +14,6 @@ namespace Cinema
 {
 	public partial class BuyTicketForm : Form
 	{
-		/*
-		 * 6 ticket buying options:
-		 * admin buy						--no info
-		 * admin buy from screenings		--movie and screening, no user
-		 * admin buy from movie screenings	--movie and screening, no user
-		 * user buy							--user, no movie, screening
-		 * user buy from screenings			--movie and screening and user
-		 * user buy from movie screenings	--movie and screening and user
-		 */
-
 		private CinemaDBEntities tables;
 		private Screening screening;
 		private int ticketPrice;
@@ -152,11 +142,6 @@ namespace Cinema
 
 		private void button1_Click(object sender, EventArgs e)
 		{
-			Ticket ticket = new Ticket();
-			ticket.Hall = screening.Hall;
-			ticket.Screening = screening.Id;
-			ticket.Price = ticketPrice;
-
 			var screeningTickets = tables.Tickets.Where(x => x.Screening == screening.Id);
 			var screeningSeats = tables.Seats.GroupJoin(
 				screeningTickets,
@@ -167,23 +152,11 @@ namespace Cinema
 				(x, y) => new { x.Seat, Ticket = y});
 			var freeSeats = screeningSeats.Where(x => x.Ticket == null).ToList();
 			
-			//foreach (var v in freeSeats)
-			//{
-			//	string value;
-			//	if (v.Ticket == null)
-			//		value = "null";
-			//	else
-			//	{
-			//		value = v.Ticket.Id + " " + v.Ticket.Screening;
-			//	}
-			//	Console.WriteLine(v.Seat.Hall + " " + v.Seat.Id + " " + value);
-			//}
-			//Console.WriteLine(freeSeats.Count());
-			//Console.WriteLine();
 			int amount = Convert.ToInt32(numericUpDown1.Value);
 			if (!freeSeats.Any())
 			{
 				MessageBox.Show("All tickets are sold to selected screening");
+				return;
 			}
 			if (amount > freeSeats.Count())
 			{
@@ -193,12 +166,10 @@ namespace Cinema
 
 			for (int j = 1; j <= amount; j++)
 			{
-				//for (int i = 1; i <= screening.Hall1.NumberOfSeats; i++) //Improve algorithm?
-				//{
-				//	var x = screening.Tickets.FirstOrDefault(y => y.Seat == i);
-				//	if (x != null)
-				//		continue;
-				//	ticket.Seat = i;
+				Ticket ticket = new Ticket();
+				ticket.Hall = screening.Hall;
+				ticket.Screening = screening.Id;
+				ticket.Price = ticketPrice;
 				var seat = freeSeats.First();
 				ticket.Seat = seat.Seat.Id;
 				tables.Tickets.Add(ticket);
@@ -211,13 +182,8 @@ namespace Cinema
 					tables.Bookings.Add(booking);
 				}
 				tables.SaveChanges();
-				//	break;
-				//}
 			}
-			if (tables.Tickets.Contains(ticket))
-				this.Close();
-			else
-				MessageBox.Show("Can't buy ticket. All tickets are sold");
+			this.Close();
 		}
 
 		private void BuyTicketForm_FormClosing(object sender, FormClosingEventArgs e)

@@ -29,6 +29,8 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.cinemaDBDataSet = new Cinema.CinemaDBDataSet();
 			this.cinemaDBDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -46,16 +48,28 @@
 			this.searchScreeningsButton = new System.Windows.Forms.Button();
 			this.searchScreenings = new System.Windows.Forms.TextBox();
 			this.screenings = new System.Windows.Forms.DataGridView();
+			this.screeningBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.tabPage3 = new System.Windows.Forms.TabPage();
 			this.movieTableAdapter = new Cinema.CinemaDBDataSetTableAdapters.MovieTableAdapter();
 			this.screeningTableAdapter = new Cinema.CinemaDBDataSetTableAdapters.ScreeningTableAdapter();
 			this.clientInfo = new System.Windows.Forms.Button();
 			this.buy = new System.Windows.Forms.Button();
-			this.screeningBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.tickets = new System.Windows.Forms.DataGridView();
+			this.ticketBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.ticketTableAdapter = new Cinema.CinemaDBDataSetTableAdapters.TicketTableAdapter();
+			this.searchTickets = new System.Windows.Forms.TextBox();
+			this.searchTicketsButton = new System.Windows.Forms.Button();
 			this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.movieDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.MovieTitle = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.timeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.hallDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Screening = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Movie = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.hallDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.seatDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.priceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			((System.ComponentModel.ISupportInitialize)(this.cinemaDBDataSet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.cinemaDBDataSetBindingSource)).BeginInit();
 			this.tabControl1.SuspendLayout();
@@ -65,6 +79,9 @@
 			this.tabPage2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.screenings)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.screeningBindingSource)).BeginInit();
+			this.tabPage3.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.tickets)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.ticketBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// cinemaDBDataSet
@@ -81,6 +98,7 @@
 			// 
 			this.tabControl1.Controls.Add(this.tabPage1);
 			this.tabControl1.Controls.Add(this.tabPage2);
+			this.tabControl1.Controls.Add(this.tabPage3);
 			this.tabControl1.Dock = System.Windows.Forms.DockStyle.Bottom;
 			this.tabControl1.Location = new System.Drawing.Point(0, 35);
 			this.tabControl1.Name = "tabControl1";
@@ -241,6 +259,23 @@
 			this.screenings.Size = new System.Drawing.Size(435, 179);
 			this.screenings.TabIndex = 0;
 			// 
+			// screeningBindingSource
+			// 
+			this.screeningBindingSource.DataMember = "Screening";
+			this.screeningBindingSource.DataSource = this.cinemaDBDataSetBindingSource;
+			// 
+			// tabPage3
+			// 
+			this.tabPage3.BackColor = System.Drawing.Color.Transparent;
+			this.tabPage3.Controls.Add(this.searchTicketsButton);
+			this.tabPage3.Controls.Add(this.searchTickets);
+			this.tabPage3.Controls.Add(this.tickets);
+			this.tabPage3.Location = new System.Drawing.Point(4, 22);
+			this.tabPage3.Name = "tabPage3";
+			this.tabPage3.Size = new System.Drawing.Size(441, 217);
+			this.tabPage3.TabIndex = 2;
+			this.tabPage3.Text = "My tickets";
+			// 
 			// movieTableAdapter
 			// 
 			this.movieTableAdapter.ClearBeforeFill = true;
@@ -269,10 +304,55 @@
 			this.buy.UseVisualStyleBackColor = true;
 			this.buy.Click += new System.EventHandler(this.buy_Click);
 			// 
-			// screeningBindingSource
+			// tickets
 			// 
-			this.screeningBindingSource.DataMember = "Screening";
-			this.screeningBindingSource.DataSource = this.cinemaDBDataSetBindingSource;
+			this.tickets.AllowUserToAddRows = false;
+			this.tickets.AllowUserToDeleteRows = false;
+			this.tickets.AutoGenerateColumns = false;
+			this.tickets.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+			this.tickets.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.tickets.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Screening,
+            this.Movie,
+            this.Time,
+            this.hallDataGridViewTextBoxColumn1,
+            this.seatDataGridViewTextBoxColumn,
+            this.priceDataGridViewTextBoxColumn});
+			this.tickets.DataSource = this.ticketBindingSource;
+			this.tickets.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.tickets.Location = new System.Drawing.Point(0, 36);
+			this.tickets.MultiSelect = false;
+			this.tickets.Name = "tickets";
+			this.tickets.RowHeadersVisible = false;
+			this.tickets.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+			this.tickets.Size = new System.Drawing.Size(441, 181);
+			this.tickets.TabIndex = 0;
+			// 
+			// ticketBindingSource
+			// 
+			this.ticketBindingSource.DataMember = "Ticket";
+			this.ticketBindingSource.DataSource = this.cinemaDBDataSet;
+			// 
+			// ticketTableAdapter
+			// 
+			this.ticketTableAdapter.ClearBeforeFill = true;
+			// 
+			// searchTickets
+			// 
+			this.searchTickets.Location = new System.Drawing.Point(8, 9);
+			this.searchTickets.Name = "searchTickets";
+			this.searchTickets.Size = new System.Drawing.Size(318, 20);
+			this.searchTickets.TabIndex = 5;
+			// 
+			// searchTicketsButton
+			// 
+			this.searchTicketsButton.Location = new System.Drawing.Point(332, 7);
+			this.searchTicketsButton.Name = "searchTicketsButton";
+			this.searchTicketsButton.Size = new System.Drawing.Size(103, 23);
+			this.searchTicketsButton.TabIndex = 4;
+			this.searchTicketsButton.Text = "Search";
+			this.searchTicketsButton.UseVisualStyleBackColor = true;
+			this.searchTicketsButton.Click += new System.EventHandler(this.searchTicketsButton_Click);
 			// 
 			// idDataGridViewTextBoxColumn
 			// 
@@ -281,6 +361,7 @@
 			this.idDataGridViewTextBoxColumn.HeaderText = "Id";
 			this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
 			this.idDataGridViewTextBoxColumn.ReadOnly = true;
+			this.idDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// movieDataGridViewTextBoxColumn
 			// 
@@ -289,6 +370,7 @@
 			this.movieDataGridViewTextBoxColumn.HeaderText = "Movie";
 			this.movieDataGridViewTextBoxColumn.Name = "movieDataGridViewTextBoxColumn";
 			this.movieDataGridViewTextBoxColumn.ReadOnly = true;
+			this.movieDataGridViewTextBoxColumn.Visible = false;
 			// 
 			// MovieTitle
 			// 
@@ -313,6 +395,56 @@
 			this.hallDataGridViewTextBoxColumn.Name = "hallDataGridViewTextBoxColumn";
 			this.hallDataGridViewTextBoxColumn.ReadOnly = true;
 			// 
+			// Screening
+			// 
+			this.Screening.DataPropertyName = "Screening";
+			this.Screening.HeaderText = "Screening";
+			this.Screening.Name = "Screening";
+			this.Screening.Visible = false;
+			// 
+			// Movie
+			// 
+			this.Movie.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+			this.Movie.FillWeight = 99.61929F;
+			this.Movie.HeaderText = "Movie";
+			this.Movie.Name = "Movie";
+			// 
+			// Time
+			// 
+			dataGridViewCellStyle1.Format = "g";
+			dataGridViewCellStyle1.NullValue = null;
+			this.Time.DefaultCellStyle = dataGridViewCellStyle1;
+			this.Time.FillWeight = 99.61929F;
+			this.Time.HeaderText = "Time";
+			this.Time.Name = "Time";
+			// 
+			// hallDataGridViewTextBoxColumn1
+			// 
+			this.hallDataGridViewTextBoxColumn1.DataPropertyName = "Hall";
+			this.hallDataGridViewTextBoxColumn1.FillWeight = 99.61929F;
+			this.hallDataGridViewTextBoxColumn1.HeaderText = "Hall";
+			this.hallDataGridViewTextBoxColumn1.Name = "hallDataGridViewTextBoxColumn1";
+			this.hallDataGridViewTextBoxColumn1.Width = 39;
+			// 
+			// seatDataGridViewTextBoxColumn
+			// 
+			this.seatDataGridViewTextBoxColumn.DataPropertyName = "Seat";
+			this.seatDataGridViewTextBoxColumn.FillWeight = 101.5228F;
+			this.seatDataGridViewTextBoxColumn.HeaderText = "Seat";
+			this.seatDataGridViewTextBoxColumn.Name = "seatDataGridViewTextBoxColumn";
+			this.seatDataGridViewTextBoxColumn.Width = 40;
+			// 
+			// priceDataGridViewTextBoxColumn
+			// 
+			this.priceDataGridViewTextBoxColumn.DataPropertyName = "Price";
+			dataGridViewCellStyle2.Format = "N2";
+			dataGridViewCellStyle2.NullValue = null;
+			this.priceDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+			this.priceDataGridViewTextBoxColumn.FillWeight = 99.61929F;
+			this.priceDataGridViewTextBoxColumn.HeaderText = "Price";
+			this.priceDataGridViewTextBoxColumn.Name = "priceDataGridViewTextBoxColumn";
+			this.priceDataGridViewTextBoxColumn.Width = 39;
+			// 
 			// UserForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -336,6 +468,10 @@
 			this.tabPage2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.screenings)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.screeningBindingSource)).EndInit();
+			this.tabPage3.ResumeLayout(false);
+			this.tabPage3.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.tickets)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.ticketBindingSource)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -363,11 +499,23 @@
 		private System.Windows.Forms.TextBox searchScreenings;
 		private System.Windows.Forms.Button clientInfo;
 		private System.Windows.Forms.Button buy;
+		private System.Windows.Forms.BindingSource screeningBindingSource;
+		private System.Windows.Forms.TabPage tabPage3;
+		private System.Windows.Forms.DataGridView tickets;
+		private System.Windows.Forms.BindingSource ticketBindingSource;
+		private CinemaDBDataSetTableAdapters.TicketTableAdapter ticketTableAdapter;
+		private System.Windows.Forms.Button searchTicketsButton;
+		private System.Windows.Forms.TextBox searchTickets;
 		private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn movieDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn MovieTitle;
 		private System.Windows.Forms.DataGridViewTextBoxColumn timeDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn hallDataGridViewTextBoxColumn;
-		private System.Windows.Forms.BindingSource screeningBindingSource;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Screening;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Movie;
+		private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+		private System.Windows.Forms.DataGridViewTextBoxColumn hallDataGridViewTextBoxColumn1;
+		private System.Windows.Forms.DataGridViewTextBoxColumn seatDataGridViewTextBoxColumn;
+		private System.Windows.Forms.DataGridViewTextBoxColumn priceDataGridViewTextBoxColumn;
 	}
 }

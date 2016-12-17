@@ -24,28 +24,26 @@ namespace Cinema
 
 		private void UserForm_Load(object sender, EventArgs e)
 		{
+			// TODO: This line of code loads data into the 'cinemaDBDataSet.Ticket' table. You can move, or remove it, as needed.
+			this.ticketTableAdapter.Fill(this.cinemaDBDataSet.Ticket);
 			// TODO: This line of code loads data into the 'cinemaDBDataSet.Screening' table. You can move, or remove it, as needed.
 			this.screeningTableAdapter.Fill(this.cinemaDBDataSet.Screening);
 			// TODO: This line of code loads data into the 'cinemaDBDataSet.Movie' table. You can move, or remove it, as needed.
 			this.movieTableAdapter.Fill(this.cinemaDBDataSet.Movie);
-			var screeningsMovies = tables.Screenings.Join(tables.Movies, s => s.Movie, m => m.Id,
-				(s, m) => new {s.Id, s.Movie, m.Title, s.Time, s.Hall}).OrderBy((s) => s.Time).Select(s => s.Time >= DateTime.Now);
-			screeningBindingSource.ResetBindings(false);
-			screeningBindingSource.DataSource = screeningsMovies.ToList();
-			screenings.DataSource = screeningBindingSource;
-			//screenings.Columns["Id"].Visible = false;
+			screenings.Columns[0].Visible = false;
+			tickets.Columns[0].Visible = false;
 		}
 
 		private void movies_CellMouseDoubleClick(object sender, DataGridViewCellMouseEventArgs e)
 		{
-			if (movies.SelectedRows.Count == 0)
-			{
-				MessageBox.Show("No movie selected");
-				return;
-			}
-			int id = (int)movies.SelectedRows[0].Cells[0].Value;
+			ShowMovieInfo();
+		}
+
+		private void ShowMovieInfo()
+		{
+			int id = (int) movies.SelectedRows[0].Cells[0].Value;
 			Movie movie = (tables.Movies.Where(x => x.Id.Equals(id))).FirstOrDefault();
-			MovieInfoForm movieInfo = new MovieInfoForm(movie);
+			MovieInfoForm movieInfo = new MovieInfoForm(movie, client);
 			movieInfo.Show();
 		}
 
@@ -87,6 +85,11 @@ namespace Cinema
 			screeningBindingSource.ResetBindings(false);
 			screeningBindingSource.DataSource = cinemaDBDataSet;
 			screeningBindingSource.DataMember = "Screening";
+			foreach (DataGridViewRow row in screenings.Rows)
+			{
+				int id = (int)row.Cells[1].Value;
+				row.Cells[2].Value = tables.Movies.Where(m => m.Id == id).Select(m => m.Title).ToList().First();
+			}
 		}
 
 		private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -99,6 +102,26 @@ namespace Cinema
 				case 1:
 					RefreshScreenings();
 					break;
+				case 2:
+					RefreshTickets();
+					break;
+			}
+		}
+
+		private void RefreshTickets()
+		{
+			searchTickets.Clear();
+			ticketBindingSource.ResetBindings(false);
+			var result = tables.Tickets.Join(tables.Bookings, t => t.Id, b => b.Ticket, (t, b) => t).ToList();
+			ticketBindingSource.DataSource = result;
+			tickets.DataSource = ticketBindingSource;
+			
+			foreach (DataGridViewRow row in tickets.Rows)
+			{
+				int id = (int)row.Cells[0].Value;
+				var screening = tables.Screenings.First(s => s.Id == id);
+				row.Cells[1].Value = screening.Movie1.Title;
+				row.Cells[2].Value = screening.Time;
 			}
 		}
 
@@ -117,7 +140,44 @@ namespace Cinema
 
 		private void buy_Click(object sender, EventArgs e)
 		{
-			//act differently with screenings, movies
+			if (tabControl1.SelectedIndex == 0)
+			{
+				if (movies.SelectedRows.Count == 0)
+				{
+					MessageBox.Show("No movie selected");
+					return;
+				}
+				ShowMovieInfo();
+			}
+			else if (tabControl1.SelectedIndex == 1)
+			{
+				if (screenings.SelectedRows.Count == 0)
+				{
+					MessageBox.Show("No screening selected");
+					return;
+				}
+				BuyTicketForm buyTicket = new BuyTicketForm(
+					CineamaSearchService.SearchScreenings(tables, screenings.SelectedRows[0].Cells[0].Value.ToString()).First(), client);
+				buyTicket.Show();
+			}
+			else
+			{
+				BuyTicketForm buyTicket = new BuyTicketForm(client);
+				buyTicket.Show();
+				RefreshTickets();
+			}
+		}
+
+		private void searchTicketsButton_Click(object sender, EventArgs e)
+		{
+			ticketBindingSource.ResetBindings(false);
+			var results = CineamaSearchService.SearchTickets(tables, searchTickets.Text);
+			if (results.Count() != 0)
+			{
+				ticketBindingSource.DataSource =
+					results.Select(ticket => new { ticket.Id, ticket.Screening, ticket.Hall, ticket.Seat, ticket.Price }).ToList();
+				tickets.DataSource = ticketBindingSource;
+			}
 		}
 	}
 }
