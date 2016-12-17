@@ -14,7 +14,11 @@ namespace Cinema
 	public partial class AdminForm : Form
 	{
 		private CinemaDBEntities tables;
-
+		/*
+		 * TO do:
+		 * patikrinti ar bilietas nepanaudotas  einant i filma, kad nesidubliuoutu
+		 * Bilietas parduodamas, ar man reikia fiksuoti jo panaudojima?
+		 */
 		public AdminForm()
 		{
 			InitializeComponent();
@@ -46,11 +50,11 @@ namespace Cinema
 
 		private void movies_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
-			if (movies.SelectedRows.Count == 0)
-			{
-				MessageBox.Show("No movie selected");
-				return;
-			}
+			ShowMovieInfo();
+		}
+
+		private void ShowMovieInfo()
+		{
 			int id = (int) movies.SelectedRows[0].Cells[0].Value;
 			Movie movie = (tables.Movies.Where(x => x.Id.Equals(id))).FirstOrDefault();
 			MovieInfoForm movieInfo = new MovieInfoForm(movie);
@@ -171,9 +175,32 @@ namespace Cinema
 
 		private void buyTicket_Click(object sender, EventArgs e)
 		{
-			BuyTicketForm ticketForm = new BuyTicketForm();
-			ticketForm.Show();
-			ticketForm.Closing += (x, args) => AdminForm_Load(this, new EventArgs());
+			if (tabControl.SelectedIndex == 0)
+			{
+				if (movies.SelectedRows.Count == 0)
+				{
+					MessageBox.Show("No movie selected");
+					return;
+				}
+				ShowMovieInfo();
+			}
+			else if (tabControl.SelectedIndex == 1)
+			{
+				if (screenings.SelectedRows.Count == 0)
+				{
+					MessageBox.Show("No screenings selected");
+					return;
+				}
+				BuyTicketForm ticketForm = new BuyTicketForm(
+					CineamaSearchService.SearchScreenings(tables, screenings.SelectedRows[0].Cells[0].Value.ToString()).First());
+				ticketForm.Show();
+			}
+			else
+			{
+				BuyTicketForm ticketForm = new BuyTicketForm();
+				ticketForm.Show();
+				ticketForm.Closing += (x, args) => AdminForm_Load(this, new EventArgs());
+			}
 		}
 
 		private void addClient_Click(object sender, EventArgs e)

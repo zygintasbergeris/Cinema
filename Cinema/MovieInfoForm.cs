@@ -12,6 +12,8 @@ namespace Cinema
 {
 	public partial class MovieInfoForm : Form
 	{
+		private Client client;
+
 		public MovieInfoForm(Movie movie)
 		{
 			InitializeComponent();
@@ -21,6 +23,18 @@ namespace Cinema
 			duration.Text = movie.Duration.ToString();
 			decription.Text = movie.Description;
 			LoadScreenings(movie);
+		}
+
+		public MovieInfoForm(Movie movie, Client client)
+		{
+			InitializeComponent();
+			title.Text = movie.Title;
+			year.Text = movie.Year.ToString();
+			director.Text = movie.Director;
+			duration.Text = movie.Duration.ToString();
+			decription.Text = movie.Description;
+			LoadScreenings(movie);
+			this.client = client;
 		}
 
 		private void LoadScreenings(Movie movie)
@@ -57,9 +71,13 @@ namespace Cinema
 		private void buy_Click(object sender, EventArgs e)
 		{
 			int id = (int)screenings.SelectedRows[0].Cells[0].Value;
-			Screening screening = ((new CinemaDBEntities()).Screenings.Where(x => x.Id.Equals(id))).FirstOrDefault();
-			BuyTicketForm buyTicket = new BuyTicketForm(screening);
 			this.Hide();
+			Screening screening = ((new CinemaDBEntities()).Screenings.Where(x => x.Id.Equals(id))).FirstOrDefault();
+			BuyTicketForm buyTicket;
+			if (client == null)
+				buyTicket = new BuyTicketForm(screening);
+			else
+				buyTicket = new BuyTicketForm(screening, client);
 			buyTicket.Show();
 			buyTicket.FormClosing += (x, args) => this.Close();
 		}
