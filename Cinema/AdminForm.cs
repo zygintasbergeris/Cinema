@@ -18,6 +18,27 @@ namespace Cinema
 		 * TO do:
 		 * patikrinti ar bilietas nepanaudotas  einant i filma, kad nesidubliuoutu
 		 * Bilietas parduodamas, ar man reikia fiksuoti jo panaudojima?
+		 * 3 budai:
+		 *		Prie dbo.Ticket prideti nauja syulpeli paimta bool
+		 *			+lengvas sprendimas
+		 *			-sudetingas EF ir DBdataset atnaujinimas
+		 *		Nauja lentele Used/OldTickets i kuria perkeliami nauji bilietai
+		 *			+leidizia issaugoti duomenis, bet istrinti is tickets => istrniti seansus
+		 *			-sudetingesnis sprendimas - kyla duomenu validavimo problema
+		 *			-seansu nematyma atitinka dabartinis sprendimas
+		 *		Patikrinus bilieta pasalinti ji is DB
+		 *			+
+		 *			-seansu nematyma atitinka dabartinis sprendimas
+		 *			-gali kilti problemu su id bilieta pasalinus
+		 *			- dingtsa info
+		 *		
+		 *		Bilietu tikrinimas:
+		 *			ateina klientas
+		 *			paduoda bilieta
+		 *			bilieto bar kodas nuskaitomas
+		 *			patikrinama ar kodas yra DB duomenu bazeje (ar nepadirbtas)
+		 *			patikrinama ar kodas yra panaudotas (ar nenaudojamas antra kart ir pns)
+		 *			pazymima apie apsilankyma
 		 */
 		public AdminForm()
 		{

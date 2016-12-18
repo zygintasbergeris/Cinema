@@ -95,12 +95,15 @@ namespace Cinema
 				return;
 			}
 			Movie movie = CineamaSearchService.SearchMovies(tables, movies.SelectedItem.ToString()).FirstOrDefault();
-			var result = tables.Screenings.Where((s) => s.Movie.Equals(movie.Id));
+			var movieScreenings = tables.Screenings.Where((s) => s.Movie.Equals(movie.Id));
 			screenings.Items.Clear();
-			foreach (var res in result)
+			foreach (var scr in movieScreenings)
 			{
-				string str = res.Id + ", " + res.Time + " " + res.Hall;
-				screenings.Items.Add(str);
+				if (scr.Time >= DateTime.Now)
+				{
+					string str = scr.Id + ", " + scr.Time + " " + scr.Hall;
+					screenings.Items.Add(str);
+				}
 			}
 		}
 
