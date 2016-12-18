@@ -73,16 +73,18 @@ namespace Cinema
 				adapter.InsertCommand.Parameters.Add(new SqlParameter("@E", SqlDbType.NVarChar, 50, "Email"));
 				DataSet ds = new DataSet();
 				adapter.Fill(ds, "Client");
-
-				DataRow newRow = ds.Tables[0].NewRow();
+				DataTable clientsTable = ds.Tables[0];
+				DataRow newRow = clientsTable.NewRow();
 				newRow["FirstName"] = Fname.Text;
 				newRow["LastName"] = Lname.Text;
 				newRow["Password"] = pass.Text;
 				newRow["DateOfBirth"] = date.Value;
 				newRow["Email"] = email.Text;
-				ds.Tables[0].Rows.Add(newRow);
 
-				adapter.Update(ds.Tables[0]);
+				clientsTable.Rows.Add(newRow);
+				ds.Dispose();
+				clientsTable.Dispose();
+				adapter.Update(clientsTable);
 				adapter.Dispose();
 			}
 			this.Close();

@@ -85,11 +85,6 @@ namespace Cinema
 			screeningBindingSource.ResetBindings(false);
 			screeningBindingSource.DataSource = cinemaDBDataSet;
 			screeningBindingSource.DataMember = "Screening";
-			foreach (DataGridViewRow row in screenings.Rows)
-			{
-				int id = (int)row.Cells[1].Value;
-				row.Cells[2].Value = tables.Movies.Where(m => m.Id == id).Select(m => m.Title).ToList().First();
-			}
 		}
 
 		private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
@@ -115,14 +110,6 @@ namespace Cinema
 			var result = tables.Tickets.Join(tables.Bookings, t => t.Id, b => b.Ticket, (t, b) => t).ToList();
 			ticketBindingSource.DataSource = result;
 			tickets.DataSource = ticketBindingSource;
-			
-			foreach (DataGridViewRow row in tickets.Rows)
-			{
-				int id = (int)row.Cells[0].Value;
-				var screening = tables.Screenings.First(s => s.Id == id);
-				row.Cells[1].Value = screening.Movie1.Title;
-				row.Cells[2].Value = screening.Time;
-			}
 		}
 
 		private void UserForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -177,6 +164,35 @@ namespace Cinema
 				ticketBindingSource.DataSource =
 					results.Select(ticket => new { ticket.Id, ticket.Screening, ticket.Hall, ticket.Seat, ticket.Price }).ToList();
 				tickets.DataSource = ticketBindingSource;
+			}
+		}
+
+		private void screenings_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+		{
+			screenings.Sort(screenings.Columns[3], ListSortDirection.Ascending);
+			foreach (DataGridViewRow row in screenings.Rows)
+			{
+				if ((DateTime)row.Cells[3].Value < DateTime.Now)
+				{
+					CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[screenings.DataSource];
+					currencyManager1.SuspendBinding();
+					row.Visible = false;
+					currencyManager1.ResumeBinding();
+					continue;
+				}
+				int id = (int)row.Cells[1].Value;
+				row.Cells[2].Value = tables.Movies.Where(m => m.Id == id).Select(m => m.Title).ToList().First();
+			}
+		}
+
+		private void tickets_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+		{
+			foreach (DataGridViewRow row in tickets.Rows)
+			{
+				int id = (int)row.Cells[0].Value;
+				var screening = tables.Screenings.First(s => s.Id == id);
+				row.Cells[1].Value = screening.Movie1.Title;
+				row.Cells[2].Value = screening.Time;
 			}
 		}
 	}

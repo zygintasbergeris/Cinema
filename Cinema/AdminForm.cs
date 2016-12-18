@@ -95,7 +95,7 @@ namespace Cinema
 				tables.Movies.Remove((tables.Movies.Where(x => x.Id.Equals(id))).FirstOrDefault());
 				tables.SaveChanges();
 			}
-			catch (Exception)
+			catch
 			{
 				MessageBox.Show("Can't remove movie. Selected movie has planed screenings");
 			}
@@ -363,6 +363,20 @@ namespace Cinema
 			hallBindingSource.DataSource = cinemaDBDataSet;
 			hallBindingSource.DataMember = "Hall";
 		}
-		
+
+		private void screenings_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+		{
+			screenings.Sort(screenings.Columns[2], ListSortDirection.Ascending);
+			foreach (DataGridViewRow row in screenings.Rows)
+			{
+				if ((DateTime)row.Cells[2].Value < DateTime.Now)
+				{
+					CurrencyManager currencyManager1 = (CurrencyManager)BindingContext[screenings.DataSource];
+					currencyManager1.SuspendBinding();
+					row.Visible = false;
+					currencyManager1.ResumeBinding();
+				}
+			}
+		}
 	}
 }

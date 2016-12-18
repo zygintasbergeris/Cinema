@@ -68,7 +68,6 @@
 			this.tabPage4 = new System.Windows.Forms.TabPage();
 			this.searchTicketsButton = new System.Windows.Forms.Button();
 			this.searchTickets = new System.Windows.Forms.TextBox();
-			this.button10 = new System.Windows.Forms.Button();
 			this.tickets = new System.Windows.Forms.DataGridView();
 			this.idDataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Screening = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -89,6 +88,7 @@
 			this.dateOfBirthDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.clientBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.button10 = new System.Windows.Forms.Button();
 			this.hallTableAdapter = new Cinema.CinemaDBDataSetTableAdapters.HallTableAdapter();
 			this.screeningTableAdapter = new Cinema.CinemaDBDataSetTableAdapters.ScreeningTableAdapter();
 			this.movieTableAdapter = new Cinema.CinemaDBDataSetTableAdapters.MovieTableAdapter();
@@ -355,6 +355,7 @@
 			this.screenings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.screenings.Size = new System.Drawing.Size(482, 150);
 			this.screenings.TabIndex = 0;
+			this.screenings.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.screenings_DataBindingComplete);
 			// 
 			// idDataGridViewTextBoxColumn1
 			// 
@@ -512,16 +513,6 @@
 			this.searchTickets.Name = "searchTickets";
 			this.searchTickets.Size = new System.Drawing.Size(347, 20);
 			this.searchTickets.TabIndex = 2;
-			// 
-			// button10
-			// 
-			this.button10.Location = new System.Drawing.Point(268, 3);
-			this.button10.Name = "button10";
-			this.button10.Size = new System.Drawing.Size(224, 23);
-			this.button10.TabIndex = 1;
-			this.button10.Text = "Buy tickets";
-			this.button10.UseVisualStyleBackColor = true;
-			this.button10.Click += new System.EventHandler(this.buyTicket_Click);
 			// 
 			// tickets
 			// 
@@ -720,6 +711,16 @@
 			// 
 			this.clientBindingSource.DataMember = "Client";
 			this.clientBindingSource.DataSource = this.cinemaDBDataSet;
+			// 
+			// button10
+			// 
+			this.button10.Location = new System.Drawing.Point(268, 3);
+			this.button10.Name = "button10";
+			this.button10.Size = new System.Drawing.Size(224, 23);
+			this.button10.TabIndex = 1;
+			this.button10.Text = "Buy tickets";
+			this.button10.UseVisualStyleBackColor = true;
+			this.button10.Click += new System.EventHandler(this.buyTicket_Click);
 			// 
 			// hallTableAdapter
 			// 
