@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Migrations;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -302,13 +303,23 @@ namespace Cinema
 		private void searchTicketsButton_Click(object sender, EventArgs e)
 		{
 			ticketBindingSource.ResetBindings(false);
+			if (searchTickets.Text.Length == 0)
+			{
+				RefreshTickets();
+				return;
+			}
 			var results = CineamaSearchService.SearchTickets(tables, searchTickets.Text);
 			if (results.Count() != 0)
 			{
 				ticketBindingSource.DataSource =
 					results.Select(ticket => new {ticket.Id, ticket.Screening, ticket.Hall, ticket.Seat, ticket.Price}).ToList();
-				tickets.DataSource = ticketBindingSource;
 			}
+			else
+			{
+				ticketBindingSource.DataSource = null;
+				
+			}
+			tickets.DataSource = ticketBindingSource;
 		}
 
 		private void searchClientsButton_Click(object sender, EventArgs e)
@@ -398,6 +409,25 @@ namespace Cinema
 					currencyManager1.ResumeBinding();
 				}
 			}
+		}
+
+		private void ticketUsed_Click(object sender, EventArgs e)
+		{
+			if (tickets.SelectedRows.Count == 0)
+			{
+				MessageBox.Show("No movie selected");
+				return;
+			}
+			Ticket ticket = CineamaSearchService.SearchTickets(tables, tickets.SelectedRows[0].Cells[0].Value.ToString()).First();
+			if (ticket.Used)
+			{
+				MessageBox.Show("Ticket already used");
+				return;
+			}
+			ticket.Used = true;
+			tables.Tickets.AddOrUpdate(ticket);
+			tables.SaveChanges();
+			MessageBox.Show("Ticket scanned");
 		}
 	}
 }

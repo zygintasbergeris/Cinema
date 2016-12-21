@@ -4,14 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2e2f85042cdc45f483ac4f39562dca09" Name="Diagram1">
+      <Diagram DiagramId="03aa6d6eefe74080b6b3a4693a8c718d" Name="Diagram1">
         <EntityTypeShape EntityType="CinemaDBModel.Booking" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaDBModel.Client" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaDBModel.Hall" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaDBModel.Movie" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaDBModel.Screening" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CinemaDBModel.Seat" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="CinemaDBModel.Ticket" Width="1.5" PointX="5.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CinemaDBModel.Ticket" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
         <AssociationConnector Association="CinemaDBModel.FK_Booking_ToClient" ManuallyRouted="false" />
         <AssociationConnector Association="CinemaDBModel.FK_Booking_ToTicket" ManuallyRouted="false" />
         <AssociationConnector Association="CinemaDBModel.FK_ScreeningToHall" ManuallyRouted="false" />

@@ -96,6 +96,7 @@
 			this.bookingBindingSource = new System.Windows.Forms.BindingSource(this.components);
 			this.bookingTableAdapter = new Cinema.CinemaDBDataSetTableAdapters.BookingTableAdapter();
 			this.clientTableAdapter = new Cinema.CinemaDBDataSetTableAdapters.ClientTableAdapter();
+			this.ticketUsed = new System.Windows.Forms.Button();
 			this.tabControl.SuspendLayout();
 			this.tabPage1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.movies)).BeginInit();
@@ -486,6 +487,7 @@
 			// tabPage4
 			// 
 			this.tabPage4.BackColor = System.Drawing.Color.Transparent;
+			this.tabPage4.Controls.Add(this.ticketUsed);
 			this.tabPage4.Controls.Add(this.searchTicketsButton);
 			this.tabPage4.Controls.Add(this.searchTickets);
 			this.tabPage4.Controls.Add(this.tickets);
@@ -497,10 +499,10 @@
 			// 
 			// searchTicketsButton
 			// 
-			this.searchTicketsButton.Location = new System.Drawing.Point(358, 6);
+			this.searchTicketsButton.Location = new System.Drawing.Point(257, 6);
 			this.searchTicketsButton.Margin = new System.Windows.Forms.Padding(2);
 			this.searchTicketsButton.Name = "searchTicketsButton";
-			this.searchTicketsButton.Size = new System.Drawing.Size(130, 23);
+			this.searchTicketsButton.Size = new System.Drawing.Size(107, 23);
 			this.searchTicketsButton.TabIndex = 3;
 			this.searchTicketsButton.Text = "Search";
 			this.searchTicketsButton.UseVisualStyleBackColor = true;
@@ -511,7 +513,7 @@
 			this.searchTickets.Location = new System.Drawing.Point(7, 8);
 			this.searchTickets.Margin = new System.Windows.Forms.Padding(2);
 			this.searchTickets.Name = "searchTickets";
-			this.searchTickets.Size = new System.Drawing.Size(347, 20);
+			this.searchTickets.Size = new System.Drawing.Size(246, 20);
 			this.searchTickets.TabIndex = 2;
 			// 
 			// tickets
@@ -751,6 +753,17 @@
 			// 
 			this.clientTableAdapter.ClearBeforeFill = true;
 			// 
+			// ticketUsed
+			// 
+			this.ticketUsed.Location = new System.Drawing.Point(368, 6);
+			this.ticketUsed.Margin = new System.Windows.Forms.Padding(2);
+			this.ticketUsed.Name = "ticketUsed";
+			this.ticketUsed.Size = new System.Drawing.Size(118, 23);
+			this.ticketUsed.TabIndex = 4;
+			this.ticketUsed.Text = "Ticket used";
+			this.ticketUsed.UseVisualStyleBackColor = true;
+			this.ticketUsed.Click += new System.EventHandler(this.ticketUsed_Click);
+			// 
 			// AdminForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -858,5 +871,6 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn dateOfBirthDataGridViewTextBoxColumn;
 		private System.Windows.Forms.DataGridViewTextBoxColumn Email;
+		private System.Windows.Forms.Button ticketUsed;
 	}
 }
